@@ -1,0 +1,325 @@
+---
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>Welcome to Station 1!</strong> I had VS Code open, Copilot in Agent Mode, and it was fixing a bug I had reported. Terminal commands were flying — lines I had never typed, doing things I did not understand. I was clicking "Accept" on every single one.</p>
+    <p class="mt-1">Then the approval prompt appeared again, and for the first time, I stopped. I did not click. I read it. I had no idea what it meant.</p>
+    <p class="mt-1">Prof. Teeters walked by, glanced at my screen, and said one thing: "Good. You finally stopped." Then she kept walking.</p>
+    <p class="mt-1">That was the moment everything changed. Let me show you what I learned next... 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={1}
+    title="The Agent Does Something Mysterious"
+    subtitle="Your first real look at what happens in the terminal"
+    description="HAP discovers terminal commands by watching Copilot, then learns pwd, ls, cd, mkdir, and touch — the five commands that make everything else possible."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg"
+    avatarAlt="HAP at a terminal, focused and curious"
+    introContent={introContent}
+    nextStationTitle="Reading, Moving, and Removing"
+    footerReminder="pwd first. ls to confirm. Read the command. Then approve."
+    labName="Living in the Terminal"
+>
+
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+
+    <!-- ============================================================
+         Terminal setup
+         ============================================================ -->
+    <section class="content-section">
+        <div class="intro-box">
+            <p><strong>Before we start:</strong> Make sure your terminal is ready.</p>
+            <ul>
+                <li><strong>Windows:</strong> Open the VS Code terminal and click the dropdown arrow next to the <code>+</code> button. Select <strong>Git Bash</strong> (two words, capital G capital B). Do not see Git Bash? Install <a href="https://git-scm.com/downloads/win">Git for Windows</a> first, then restart VS Code.</li>
+                <li><strong>Mac:</strong> Your terminal defaults to zsh. No changes needed.</li>
+            </ul>
+            <p class="mt-1">All commands in this lab work in both bash and zsh. Every example I show will look the same on either system.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Copilot interview
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Asking Copilot to Explain Itself</h2>
+
+            <p class="mb-2">After Prof. Teeters walked away, I decided to do something I had never done before. Instead of asking Copilot to fix my code, I asked it to explain what it had been doing. Here is that conversation:</p>
+
+            <blockquote class="copilot-exchange" style="border-left: 4px solid hsl(210, 60%, 50%); background: hsl(210, 30%, 97%); padding: 1.25rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0;">
+                <p style="margin-bottom: 1rem;"><strong>HAP:</strong> I was told agents use the terminal and I need to understand that. I can do <code>npm install</code> and <code>npm run dev</code> but not a lot.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>Copilot:</strong> Great question! When I work in Agent Mode, I run shell commands in a real terminal session — the same terminal you see in VS Code. Here is what that means:</p>
+                <ul style="margin-bottom: 0.75rem;">
+                    <li><strong>Shell commands:</strong> I type commands like <code>ls</code>, <code>cd</code>, <code>mkdir</code>, and <code>cat</code> — the same commands any developer would type by hand.</li>
+                    <li><strong>Persistent sessions:</strong> When I <code>cd</code> into a directory, I stay there. Environment state carries forward from one command to the next, the same way it does when you type manually.</li>
+                    <li><strong>Run, inspect, react:</strong> I run a command, read the output, and decide what to do next based on what the terminal tells me. If there is an error, I adapt.</li>
+                </ul>
+                <p>Think of it this way: I am not doing anything magical. I am typing commands into the same zsh session you have open, reading what comes back, and making decisions.</p>
+            </blockquote>
+
+            <p class="mt-1">That last line stuck with me: "I am not doing anything magical." The commands were not secret. They were learnable. I decided to learn them.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Grace Moment 1 — pwd
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Where Am I? — <code>pwd</code></h2>
+
+            <p class="mb-2">After reading Copilot's explanation, I muttered out loud: "But where is the terminal even pointing? How do I know what folder it is looking at?"</p>
+
+            <div class="hap-note-callout">
+                <div class="hap-note-content">
+                    <h3>Grace Hopper, without turning around:</h3>
+                    <p>"Type <code>pwd</code>. It will tell you exactly where you are. That is always the first question."</p>
+                </div>
+            </div>
+
+            <p class="mt-1">I typed it:</p>
+
+            <CodeBlock code={`pwd`} lang="bash" />
+
+            <p class="mt-1">And the terminal responded with something like:</p>
+
+            <CodeBlock code={`/Users/hap/projects/my-website`} lang="bash" />
+
+            <p class="mt-1"><code>pwd</code> stands for "print working directory." It does not change anything. It does not move you anywhere. It answers one question: <em>where am I right now?</em></p>
+
+            <p class="mt-1">I learned from Prof. Teeters that this is the command you type when you are lost, when you are unsure, when something feels wrong. It costs nothing and tells you everything you need to orient yourself.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Grace Moment 2 — zsh correction
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>A Correction from Grace</h2>
+
+            <p class="mb-2">I was re-reading Copilot's explanation when Grace spoke again. She had been listening the whole time.</p>
+
+            <div class="hap-note-callout">
+                <div class="hap-note-content">
+                    <h3>Grace Hopper, still not turning around:</h3>
+                    <p>"Copilot said 'zsh session.' The shell depends on your environment. On Windows with Git Bash, you are running bash. Do not assume. Type <code>echo $SHELL</code> if you want to know."</p>
+                </div>
+            </div>
+
+            <p class="mt-1">She was right. Copilot had said "the same zsh session" — but that is only true on a Mac. On Windows with Git Bash, the shell is bash. The commands we are learning work in both, but Grace wanted me to understand: do not repeat something an agent tells you without verifying it. 😳</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         ls
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What Is Here? — <code>ls</code></h2>
+
+            <p class="mb-2">Now I knew <em>where</em> I was. The next question: <em>what is in this location?</em></p>
+
+            <CodeBlock code={`ls`} lang="bash" />
+
+            <p class="mt-1">This lists the files and folders in your current directory. When I ran it inside my project folder, I saw familiar names — <code>src</code>, <code>package.json</code>, <code>node_modules</code>. The same files I could see in the VS Code sidebar.</p>
+
+            <p class="mt-1">But <code>ls</code> by itself hides things. Files that start with a dot (like <code>.gitignore</code>) do not show up. To see everything, including hidden files and details like file sizes:</p>
+
+            <CodeBlock code={`ls -la`} lang="bash" />
+
+            <p class="mt-1">The <code>-l</code> flag means "long format" — more detail per file. The <code>-a</code> flag means "all" — including hidden files. When I was practicing, I ran <code>ls -la</code> and discovered files I had never noticed in the sidebar. They had been there the whole time.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         cd
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Moving Around — <code>cd</code></h2>
+
+            <p class="mb-2"><code>cd</code> stands for "change directory." It moves the terminal's focus from one folder to another.</p>
+
+            <CodeBlock code={`cd src`} lang="bash" />
+
+            <p class="mt-1">After running that, I typed <code>pwd</code> again to confirm:</p>
+
+            <CodeBlock code={`pwd
+/Users/hap/projects/my-website/src`} lang="bash" />
+
+            <p class="mt-1">I was inside <code>src</code> now. Here are the three variations I use constantly:</p>
+
+            <CodeBlock code={`cd ..        # Go up one level (back to the parent folder)
+cd ~         # Go to your home directory, no matter where you are
+cd -         # Go back to wherever you just were`} lang="bash" />
+
+            <p class="mt-1">The <code>cd ..</code> pattern is the one I reach for most. Two dots means "the folder above this one." One dot means "this folder." That distinction matters.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Experimentation scene
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Experiment: Terminal and Sidebar, Same Room</h2>
+
+            <p class="mb-2">I wanted to prove to myself that the terminal and the VS Code sidebar were looking at the same place. So I ran a sequence:</p>
+
+            <CodeBlock code={`pwd
+cd src
+pwd
+ls
+cd ..
+pwd`} lang="bash" />
+
+            <p class="mt-1">Every time I ran <code>cd</code>, I followed it with <code>pwd</code> to confirm where I landed. And every time, the VS Code sidebar matched. When I was in <code>src</code>, the sidebar highlighted <code>src</code>. When I moved back up, the sidebar reflected that too.</p>
+
+            <p class="mt-1">Same room. Same files. The terminal is not a separate world — it is another window into the same project. I kept using <code>pwd</code> as my checkpoint between every move until it became automatic.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         mkdir and touch
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Creating Things — <code>mkdir</code> and <code>touch</code></h2>
+
+            <p class="mb-2">Navigating is one skill. Creating is another. These two commands let you build the structure of a project from the terminal.</p>
+
+            <h3 class="mt-2"><code>mkdir</code> — make a directory</h3>
+
+            <CodeBlock code={`mkdir components`} lang="bash" />
+
+            <p class="mt-1">This creates a new folder called <code>components</code> inside whatever directory you are currently in. That is why <code>pwd</code> matters before you create anything — you need to know <em>where</em> the folder will appear.</p>
+
+            <h3 class="mt-2"><code>touch</code> — create a file</h3>
+
+            <CodeBlock code={`touch index.html`} lang="bash" />
+
+            <p class="mt-1">This creates an empty file. It does not open it. It does not put anything inside it. It creates it and moves on. If the file already exists, <code>touch</code> updates its timestamp without changing its contents.</p>
+
+            <p class="mt-1">I used both together to build a small folder structure:</p>
+
+            <CodeBlock code={`mkdir practice-project
+cd practice-project
+mkdir css js
+touch index.html css/style.css js/app.js
+ls`} lang="bash" />
+
+            <p class="mt-1">When I ran <code>ls</code>, I saw <code>css</code>, <code>js</code>, and <code>index.html</code> — exactly the structure I intended. And the VS Code sidebar updated in real time to show it.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Breakthrough
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Moment It Clicked</h2>
+
+            <p class="mb-2">I went back to Copilot and asked it to fix another bug. This time, I watched the terminal commands it ran. And I could read them.</p>
+
+            <div class="hap-note-callout">
+                <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-brain-explodes_wu0or8.jpg"
+                    alt="HAP with an explosion of understanding"
+                    width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+                <div class="hap-note-content">
+                    <h3>The Breakthrough:</h3>
+                    <p>"The agent was not conjuring files. It was using the same five commands I had learned. The commands did not change. I did."</p>
+                </div>
+            </div>
+
+            <p class="mt-1">I had been approving a language I could not read. Now I can read it. The command did not change. I did.</p>
+
+            <p class="mt-1">🟠 And with that came a new habit: <strong>pwd first. ls to confirm. Read the command. Then approve.</strong></p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Confession
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Mistakes I Made Along the Way</h2>
+
+            <p class="mb-2">This was not a smooth journey. Here are three things that tripped me up while I was learning:</p>
+
+            <div class="hap-note-callout">
+                <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-broke-things_qtbum4.jpg"
+                    alt="HAP surrounded by broken code with an embarrassed expression"
+                    width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+                <div class="hap-note-content">
+                    <h3>HAP's Confession:</h3>
+                    <ul>
+                        <li>I typed <code>mkdir my project</code> and got two folders — one called <code>my</code> and one called <code>project</code>. Spaces split arguments. Use quotes (<code>mkdir "my project"</code>) or hyphens (<code>mkdir my-project</code>).</li>
+                        <li>I tried to <code>cd</code> into a folder that did not exist. The terminal gave me an error: <code>No such file or directory</code>. It is not gentle. It does not guess what you meant.</li>
+                        <li>I ran <code>touch notes.txt</code> and then could not find the file anywhere. I had not checked where I was with <code>pwd</code>, and I had not confirmed with <code>ls</code>. The file existed — in the wrong directory.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Quick reference
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">HAP's Five-Command Cheat Sheet</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3><code>pwd</code> — Where am I?</h3>
+                    <p>Prints the full path to your current directory. Use it before creating files, after changing directories, and whenever you feel lost.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3><code>ls</code> — What is here?</h3>
+                    <p>Lists files and folders in your current location. Add <code>-la</code> to see hidden files and details. Always run after <code>pwd</code> to confirm what you are working with.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3><code>cd</code> — Move somewhere</h3>
+                    <p>Changes your working directory. Use <code>cd ..</code> to go up, <code>cd ~</code> for home, and <code>cd -</code> to go back. Always follow with <code>pwd</code> until it becomes automatic.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3><code>mkdir</code> — Create a folder</h3>
+                    <p>Makes a new directory inside your current location. Watch out for spaces in names — use hyphens or quotes instead.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3><code>touch</code> — Create a file</h3>
+                    <p>Creates an empty file. Does not open it or add content. Run <code>pwd</code> first so you know where the file will land.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="mt-2" style="text-align: center; font-style: italic;">Next station we go deeper — not navigating, but working with files. And learning why the terminal has no undo.</p>
+    </section>
+
+    <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+
+</StationLayout>

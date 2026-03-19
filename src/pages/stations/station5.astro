@@ -1,0 +1,193 @@
+---
+/**
+ * Station 5 - The Terminal Gets a Brain
+ * HAP's Learning Lab: Living in the Terminal
+ *
+ * Topics: MCP servers, CLI vs MCP tradeoffs, Lighthouse audit
+ * Characters: Grace Hopper (1 moment — overhearing)
+ * No Prof. Teeters this station. No Copilot interview.
+ */
+
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>Welcome to Station 5!</strong> Station 3 taught me tools — commands that reach out to servers, APIs, the network. Station 4 taught me context — how the agent understands what I am working on and why. Station 5 is the place where those two ideas meet.</p>
+    <p class="mt-1">What if the agent could use the terminal's tools directly? Not by me typing commands and pasting output — but by having a structured way to call tools on its own. That is what MCP servers are. They give the agent hands.</p>
+    <p class="mt-1">There is even a server called Context7 whose only job is giving the agent current documentation — because the agent needs help knowing things too. That one connected a lot of dots for me.</p>
+    <p class="mt-1">I explored three MCP servers, ran a real audit against a live site, and learned a tradeoff that I think every developer needs to understand right now. 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={5}
+    title="The Terminal Gets a Brain"
+    subtitle="MCP servers, CLI tradeoffs, and knowing when each one wins"
+    description="HAP meets MCP servers, runs Lighthouse against the live site, and works through the CLI vs MCP tradeoff honestly."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg"
+    avatarAlt="HAP at a terminal, evaluating tools"
+    introContent={introContent}
+    nextStationTitle="AI Assistance for Living in the Terminal"
+    footerReminder="CLI for speed and direct control. MCP when no good CLI equivalent exists. And always: know the tradeoff."
+    labName="Living in the Terminal"
+>
+
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+
+    <!-- ============================================================
+         SECTION 1: Three MCP servers — card layout
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Three Servers Worth Knowing</h2>
+
+            <p class="mb-2">MCP stands for Model Context Protocol. It is a way for an agent to call tools through a structured interface instead of raw CLI commands. The agent sends a request, the server does the work, and a structured response comes back. Same idea as an API — but designed for agents, not browsers.</p>
+
+            <p class="mb-2">I looked at three MCP servers. Each one taught me something different about when this protocol earns its overhead — and when it does not.</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h3>Playwright</h3>
+                    <p><strong>What it is:</strong> A browser controlled by code, not a human. The agent can navigate pages, click buttons, and read content — all without me touching a browser window.</p>
+                    <p class="mt-1"><strong>Why it is here:</strong> In Station 3, I used a simple command to talk to a server. Playwright talks to a browser the same way — full circle.</p>
+                    <p class="mt-1"><strong>The key detail:</strong> There is no CLI equivalent for agent-controlled browsing. This is a case where MCP fills a gap that the terminal cannot. Runs via npx — no Docker needed.</p>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>GitHub</h3>
+                    <p><strong>What it is:</strong> Agent-native GitHub access. I already know the <code>gh</code> CLI from Station 3 — this is the agent version of that same capability.</p>
+                    <p class="mt-1"><strong>Why it is here:</strong> <code>gh</code> is me typing. GitHub MCP is the agent reading. Same capabilities, different actor.</p>
+                    <p class="mt-1"><strong>The key detail:</strong> I already have <code>gh</code>, so GitHub MCP is not needed for my daily workflow. But for agent automation — reviewing PRs, reading issues, summarizing repos — it is valid. The tradeoff matters though, and I will get to that.</p>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>Lighthouse</h3>
+                    <p><strong>What it is:</strong> Performance, accessibility, SEO, and best practices audit for any URL. It scores a site across four categories and tells you exactly what to fix.</p>
+                    <p class="mt-1"><strong>Why it is here:</strong> Both CLI and MCP versions exist. This is where the CLI vs MCP question gets most concrete.</p>
+                    <p class="mt-1"><strong>The key detail:</strong> I ran it right here, against a live site. Let me show you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Lighthouse CLI run
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Running Lighthouse Against a Live Site</h2>
+
+            <p class="mb-2">I pointed Lighthouse at the hap-7000 site deployed on Netlify. One command:</p>
+
+            <CodeBlock code={`npx lighthouse https://hap-7000.netlify.app --output=json --quiet`} lang="bash" />
+
+            <p class="mt-1">It ran for about twenty seconds. When it finished, four scores appeared:</p>
+
+            <CodeBlock code={`Performance:    97
+Accessibility:  92
+Best Practices: 100
+SEO:            91`} lang="text" />
+
+            <p class="mt-1">That is the CLI version. I typed the command, I got the output, I read the scores. Fast and direct.</p>
+
+            <p class="mt-1">But here is where it gets interesting. Give the agent that JSON output, tell it to fix whatever scores below 90, and it knows exactly what to do. The structured data from the CLI becomes the agent's action plan. The CLI did the audit. The agent does the remediation. They work together.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: CLI vs MCP tradeoff
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The CLI vs MCP Tradeoff</h2>
+
+            <p class="mb-2">After working with all three servers, I started seeing a pattern. Sometimes the CLI wins. Sometimes MCP wins. The question is always the same: does the overhead earn what you get back?</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h3>CLI wins when</h3>
+                    <ul>
+                        <li>Speed matters — one command, one result, done</li>
+                        <li>You want direct control over exactly what runs</li>
+                        <li>The task is single-purpose and well-defined</li>
+                        <li>Low overhead — no server initialization, no token cost</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>MCP wins when</h3>
+                    <ul>
+                        <li>No good CLI equivalent exists (like Playwright)</li>
+                        <li>You want the agent to act on its own — delegation</li>
+                        <li>The workflow has multiple steps that need coordination</li>
+                        <li>Structured responses matter more than raw speed</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="mt-2">Right now, CLI often wins on speed and context efficiency. GitHub MCP alone costs around 55,000 tokens to load — and that is before the agent does a single thing with it. That is context window space that could hold your entire codebase summary instead.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Grace Hopper moment
+         ============================================================ -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <div class="hap-note-content">
+                <h3>Grace Hopper, overhearing:</h3>
+                <p>"The protocol is not the problem. The question is whether the overhead is justified by what you receive in return."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         HAP's honest caveat
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>An Honest Caveat</h2>
+
+            <p>This might change. Context windows are getting bigger. MCP tooling is getting faster. The token cost of initialization will drop. What I can tell you is the tradeoff — so when it shifts, you will know why. You will not be guessing. You will be measuring.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         HAP's Confession
+         ============================================================ -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by broken code with an embarrassed expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession:</h3>
+                <ul>
+                    <li>I plugged in too many MCP servers at once — context window filled with tool descriptions, agent got slower and less accurate. Lesson: if you are not actively using an MCP server, turn it off. 😳</li>
+                    <li>I used GitHub MCP for a simple <code>gh repo view</code> — loaded 55,000 tokens to do a two-second CLI task. The agent worked fine. The overhead was absurd.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Close and next station
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What Station 5 Taught Me</h2>
+
+            <p class="mb-2">Station 3: tools. Station 4: context. Station 5: structured agent access. The terminal's reach, extended through a richer protocol. Not a replacement — an extension. And one that comes with real costs I need to weigh every time I reach for it.</p>
+
+            <p class="mt-1">I put together a <a href="/cli-cheat-sheet/">cheat sheet</a> that covers the CLI tools I use most.</p>
+
+            <p class="mt-1"><strong>Next: Station 6 is the human side of all of this.</strong> The tools are learned. The tradeoffs are understood. What remains is being the architect who holds it together. 🟠</p>
+
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+        </div>
+    </section>
+
+</StationLayout>

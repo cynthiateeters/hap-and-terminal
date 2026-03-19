@@ -1,0 +1,228 @@
+---
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>Welcome to Station 4!</strong> I had been watching Copilot make decisions for three stations now — running commands, choosing file structures, writing code a certain way. It all worked, but I never understood <em>why</em> it made those choices. I assumed it was some kind of built-in intelligence.</p>
+    <p class="mt-1">Then Grace said something that changed everything. She did not even look up from her screen.</p>
+    <p class="mt-1">This is the station where I stopped blaming Copilot and started reading what it reads. 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={4}
+    title="The Terminal Has a Memory"
+    subtitle="Context engineering — teaching the agent what you already know"
+    description="HAP discovers AGENTS.md, learns how Copilot reads workspace context, and changes agent behavior by changing what the agent reads."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg"
+    avatarAlt="HAP at a laptop, studying AGENTS.md"
+    introContent={introContent}
+    nextStationTitle="The Terminal Gets a Brain"
+    footerReminder="I did not change Copilot. I changed what it reads. That is the whole thing."
+    labName="Living in the Terminal"
+>
+
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+
+    <!-- ============================================================
+         Grace's catalyst
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Grace's One Line</h2>
+
+            <p class="mb-2">I was sitting next to Grace, watching her work with Copilot. She typed a prompt, Copilot responded, and the code was exactly right. No corrections. No back-and-forth. She moved on to the next thing without hesitating.</p>
+
+            <p class="mt-1">I had been struggling with the same tool for three stations. Copilot gave me suggestions that were close but never quite what I expected. I kept correcting it. Grace never seemed to need to.</p>
+
+            <p class="mt-1">I did not ask her anything. I was still watching. Then she said it — the only time in this entire lab that Grace volunteered information without being asked:</p>
+
+            <div class="hap-note-callout">
+                <div class="hap-note-content">
+                    <h3>Grace Hopper, unprompted:</h3>
+                    <p>"They call it being a 10x engineer. I call it knowing what your tools are doing and putting that to maximum use."</p>
+                </div>
+            </div>
+
+            <p class="mt-1">She turned back to her terminal. That was it. No follow-up, no explanation. But the sentence stayed with me: <em>knowing what your tools are doing</em>. I did not know what Copilot was doing. I knew what it produced, but not why it produced it that way.</p>
+
+            <p class="mt-1">I decided to find out.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Copilot interview
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Interviewing Copilot About Context</h2>
+
+            <p class="mb-2">Instead of asking Copilot to write code, I asked it to explain itself. I wanted to understand how it decides what to suggest. Here is the full exchange:</p>
+
+            <details>
+                <summary>See full Copilot exchange</summary>
+                <div style="padding: 1rem; background: hsl(220, 13%, 95%); border-radius: 8px; margin-top: 0.5rem;">
+                    <p style="margin-bottom: 1rem;"><strong>HAP:</strong> I was told I need to start using context engineering. I need to understand how you work naturally and how I go about changing your behavior.</p>
+
+                    <p style="margin-bottom: 0.75rem;"><strong>Copilot:</strong> Great question! When I work in your project, I do not start from zero. I read your workspace to understand how your project is structured and what conventions you follow. Here is what I look at:</p>
+
+                    <ul style="margin-bottom: 0.75rem;">
+                        <li><strong>Instruction files:</strong> I check for files like <code>AGENTS.md</code>, <code>.github/copilot-instructions.md</code>, and <code>.instructions.md</code>. These are files you write specifically to tell me how to behave in your project. If they exist, I read them first.</li>
+                        <li><strong>Package files:</strong> I read <code>package.json</code> to understand your dependencies, scripts, and project type. This tells me whether you are using Vite, Astro, React, or something else entirely.</li>
+                        <li><strong>Open files:</strong> Whatever files you have open in your editor, I can see those too. They give me immediate context about what you are working on right now.</li>
+                        <li><strong>Recent actions:</strong> If you have been editing a CSS file and then ask me a question, I know the conversation is probably about styling. Your recent activity shapes my suggestions.</li>
+                        <li><strong>Project structure:</strong> I look at your folder layout — <code>src/</code>, <code>components/</code>, <code>layouts/</code> — to understand how your project is organized and follow the same patterns.</li>
+                    </ul>
+
+                    <p style="margin-bottom: 1rem;"><strong>HAP:</strong> So if I want you to always use ES modules instead of require, or always use const instead of var — how do I make that happen?</p>
+
+                    <p style="margin-bottom: 0.75rem;"><strong>Copilot:</strong> You put those rules in an instruction file. For example, if you add this to your <code>AGENTS.md</code>:</p>
+
+                    <ul style="margin-bottom: 0.75rem;">
+                        <li><code>ES modules only — import/export, never require</code></li>
+                        <li><code>const by default, let only when reassignment needed, never var</code></li>
+                    </ul>
+
+                    <p style="margin-bottom: 0.75rem;">Then every time I generate code in that project, I will follow those rules. You are not changing me — you are changing what I read. The instruction file becomes part of my context, and my suggestions change to match.</p>
+
+                    <p><strong>HAP:</strong> So context engineering is writing the files that you read before you do anything?</p>
+
+                    <p style="margin-top: 0.75rem;"><strong>Copilot:</strong> Exactly. You are shaping my behavior by shaping my input. The better your instruction files are, the less you have to correct me. That is the whole idea.</p>
+                </div>
+            </details>
+
+            <p class="mt-2">That last answer hit hard: "You are not changing me — you are changing what I read." I had been treating Copilot like a black box. It was never a black box. It was reading files I had never bothered to look at.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         HAP opens AGENTS.md
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Opening AGENTS.md</h2>
+
+            <p class="mb-2">Copilot mentioned instruction files. I already had one. The ready-build repo from Station 3 — the one I had cloned and been working in — had an <code>AGENTS.md</code> file sitting in the project root the entire time. I opened it.</p>
+
+            <CodeBlock code={`## Code rules
+
+### JavaScript
+- ES modules only — \`import\`/\`export\`, never \`require\`
+- \`const\` by default; \`let\` only when reassignment needed; never \`var\`
+- \`textContent\` for user input in DOM; \`innerHTML\` only for hardcoded template literals
+- No \`eval()\`, no leftover \`console.log\` in committed code
+
+### HTML
+- Semantic elements: \`<nav>\`, \`<main>\`, \`<header>\`, \`<footer>\`, \`<section>\`
+- Every \`<input>\` needs a linked \`<label>\`
+- Every \`<img>\` needs a descriptive \`alt\``} lang="markdown" />
+
+            <p class="mt-1">I stared at it. Every rule in this file matched the behavior I had been seeing from Copilot. When it used <code>const</code> instead of <code>let</code> — that was not a preference. It was following an instruction. When it added <code>alt</code> attributes to every image — not a coincidence. It was reading this file.</p>
+
+            <p class="mt-1">Copilot had been reading this the whole time. Every suggestion it made was shaped by this file. The answer was in the repo before I even cloned it.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         HAP adds one rule
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Adding One Rule</h2>
+
+            <p class="mb-2">I wanted to test this. If Copilot reads AGENTS.md and follows what it says, then adding a new rule should change its behavior immediately. I opened the file and added one line at the bottom:</p>
+
+            <CodeBlock code={`## Communication style
+- When I ask you to explain something, use an analogy before showing code`} lang="markdown" />
+
+            <p class="mt-1">Then I saved the file and asked Copilot: "Explain how CSS flexbox works."</p>
+
+            <p class="mt-1">Copilot started with: "Think of a flex container like a bookshelf. The shelf itself decides the direction books are arranged — left to right or stacked top to bottom. Each book is a flex item, and the shelf controls how much space each book gets and whether they wrap to a second row when the shelf gets full."</p>
+
+            <p class="mt-1">Then it showed the code.</p>
+
+            <p class="mt-1">It worked. One line in a markdown file changed how an AI agent communicates with me. I did not install anything. I did not change a setting. I edited a text file.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Breakthrough
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Moment It Clicked</h2>
+
+            <div class="hap-note-callout">
+                <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-brain-explodes_wu0or8.jpg"
+                    alt="HAP with an explosion of understanding"
+                    width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+                <div class="hap-note-content">
+                    <h3>The Breakthrough:</h3>
+                    <p>"I did not change Copilot. I changed what it reads. That is the whole thing."</p>
+                </div>
+            </div>
+
+            <p class="mt-1">This was the biggest shift in how I think about working with AI agents. The agent is not mysterious. It is not unpredictable. It is reading files and following instructions — the same way I read a syllabus and follow it. The quality of its output depends on the quality of its input.</p>
+
+            <p class="mt-1">Context engineering is not a fancy technique. It is writing clear instructions in a file that the agent reads before it does anything else.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Terminal context connection
+         ============================================================ -->
+    <section class="content-section">
+        <div class="intro-box">
+            <p><strong>Context is not files alone.</strong> It is everything the agent can see from where it is standing.</p>
+            <p class="mt-1">Think about what else shapes the terminal's behavior: environment variables tell it where tools are installed. The <code>PATH</code> variable determines which commands are available. Persistent session state means that a <code>cd</code> command in one line changes the working directory for every line after it.</p>
+            <p class="mt-1">Back in Station 1, I learned that <code>pwd</code> tells me where the terminal is pointing. Copilot has a location too — it is standing in the workspace, reading everything it can see from that position. <code>AGENTS.md</code> is one of those things. <code>package.json</code> is another. Open files are another. Now I know where Copilot is standing, and I know how to change what it sees.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Confession
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Mistakes I Made Along the Way</h2>
+
+            <p class="mb-2">Adding rules to AGENTS.md felt powerful. Too powerful. I got overconfident and made two mistakes that taught me more than the successes did:</p>
+
+            <div class="hap-note-callout">
+                <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-broke-things_qtbum4.jpg"
+                    alt="HAP surrounded by broken code with an embarrassed expression"
+                    width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+                <div class="hap-note-content">
+                    <h3>HAP's Confession:</h3>
+                    <ul>
+                        <li>I added the instruction "Be helpful" to AGENTS.md. Nothing changed. Copilot's behavior was identical before and after. The rule was too vague — it gave the agent nothing specific to act on. Instructions need to describe concrete behavior, not general attitudes. 😳</li>
+                        <li>I added a rule that said "Use <code>var</code> for all variable declarations" — which directly contradicted the existing rule that said "never <code>var</code>." Copilot got confused and started mixing <code>var</code> and <code>const</code> inconsistently. Lesson learned: instructions can conflict with each other. Be specific and be consistent. Read what is already there before adding something new.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Close
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What Grace Meant</h2>
+
+            <p class="mb-2">I kept thinking about what Grace said at the beginning of this station: "Knowing what your tools are doing and putting that to maximum use."</p>
+
+            <p class="mt-1">Now I know what that means. It means reading AGENTS.md before I blame Copilot. It means understanding that the agent is not guessing — it is following instructions I can see, edit, and improve. The tool was never broken. I was not reading its input.</p>
+
+            <p class="mt-1">🟠 <strong>Context engineering is the skill.</strong> The terminal, the workspace, the instruction files — they are all context. And now I know how to shape it.</p>
+
+            <p class="mt-2" style="text-align: center; font-style: italic;">HAP has tools, a harness, and context. Next station, HAP meets the agents that use all three.</p>
+        </div>
+    </section>
+
+    <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+
+</StationLayout>

@@ -1,0 +1,255 @@
+---
+/**
+ * Station 2 - Reading, Moving, and Removing
+ * HAP's Learning Lab: Living in the Terminal
+ *
+ * Commands covered: cat, less, cp, mv, rm, head/tail mention, flags concept
+ * Characters: Grace Hopper (2 moments), Prof. Teeters (1 moment)
+ * No Copilot this station.
+ */
+
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>Welcome to Station 2!</strong> I opened my terminal and typed <code>pwd</code> before anything else. It felt automatic now — a habit from Station 1 that I did not have to think about anymore.</p>
+    <p class="mt-1">Then <code>ls</code> to see what was around me. Two commands, two seconds, and I knew exactly where I was standing.</p>
+    <p class="mt-1">Station 1 taught me to look around. Station 2 taught me to act — to read files, move them, copy them, and remove them. And it taught me what the terminal does not forgive.</p>
+    <p class="mt-1">Let me show you what I learned — and what Grace Hopper stopped me from doing... 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={2}
+    title="Reading, Moving, and Removing"
+    subtitle="Working with files — and learning what the terminal does not forgive"
+    description="HAP learns to read, copy, move, and remove files in the terminal. Grace Hopper intervenes at the most dangerous moment in the entire lab."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg"
+    avatarAlt="HAP at a laptop, studying intently"
+    introContent={introContent}
+    nextStationTitle="The Terminal Reaches Out"
+    footerReminder="The terminal does not protect you from yourself. That is not a flaw — it is respect."
+    labName="Living in the Terminal"
+>
+
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+
+    <!-- ============================================================
+         SECTION 1: Reading files — cat, less, and Grace's first moment
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Reading Files</h2>
+
+            <p class="mb-2">The first thing I wanted to do was look inside a file. I knew <code>ls</code> could show me filenames, but I wanted to see what was <em>in</em> them. The command for that is <code>cat</code>.</p>
+
+            <CodeBlock code={`cat readme.txt`} lang="bash" />
+
+            <p class="mt-1">It printed the entire file to the screen. For a short file like <code>readme.txt</code>, that worked fine. Then I tried it on a larger file.</p>
+
+            <CodeBlock code={`cat bundle.js`} lang="bash" />
+
+            <p class="mt-1">A wall of text blasted past faster than I could read. Hundreds of lines, gone in a blink. I was scrolling frantically when I heard a voice behind me.</p>
+
+            <div class="hap-note-callout">
+                <div class="hap-note-content">
+                    <h3>Grace Hopper, without turning around:</h3>
+                    <p>"Use <code>less</code>. It pages the output. <code>cat</code> is for small files or piping. You will learn piping later."</p>
+                </div>
+            </div>
+
+            <p class="mt-1">I tried it.</p>
+
+            <CodeBlock code={`less bundle.js`} lang="bash" />
+
+            <p class="mt-1">The file appeared one screen at a time. I could use the arrow keys to scroll up and down, spacebar to jump a full page, and <code>q</code> to quit when I was done. It felt like reading instead of drowning.</p>
+
+            <p class="mt-1">Two more commands worth knowing by name: <code>head</code> shows the first few lines of a file, and <code>tail</code> shows the last few. They both take flags to control how many lines. Copilot knows all the details whenever I need them.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Flags concept
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Flags — Modifying Commands</h2>
+
+            <div class="intro-box">
+                <p><strong>Flags are how you modify commands.</strong> Single dash for short flags (<code>-f</code>), double dash for long flags (<code>--follow</code>). And here is the trick that changed everything for me: almost every command supports <code>--help</code>. The command can explain itself.</p>
+            </div>
+
+            <p class="mt-1">I tried it on <code>git</code>.</p>
+
+            <CodeBlock code={`git --help`} lang="bash" />
+
+            <p class="mt-1">A list of every subcommand and option <code>git</code> supports appeared. Commands I had never seen before. Options I did not know existed. The terminal was not hiding anything from me — I had not thought to ask.</p>
+
+            <p class="mt-1">"The terminal can explain itself." I said it out loud, to no one in particular. For deeper explanations of what specific flags do, Copilot can walk through them in context.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Copying and moving — cp, mv
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Copying and Moving Files</h2>
+
+            <p class="mb-2">Copying a file is straightforward. The command is <code>cp</code>, and it takes two arguments: the source and the destination.</p>
+
+            <CodeBlock code={`cp notes.txt notes-backup.txt`} lang="bash" />
+
+            <p class="mt-1">Now I had two files. The original was untouched. Over in VS Code, the sidebar updated in real time — <code>notes-backup.txt</code> appeared the moment I ran the command.</p>
+
+            <p class="mt-1">Moving a file uses <code>mv</code>.</p>
+
+            <CodeBlock code={`mv notes-backup.txt archive/notes-backup.txt`} lang="bash" />
+
+            <p class="mt-1">The file disappeared from the current directory and appeared inside <code>archive/</code>. But then I discovered something that surprised me — <code>mv</code> is also how you rename.</p>
+
+            <CodeBlock code={`mv old-name.txt new-name.txt`} lang="bash" />
+
+            <p class="mt-1">There is no separate <code>rename</code> command. Moving a file to a new name in the same directory <em>is</em> renaming. Once I understood that, it made sense — the filesystem does not distinguish between "move" and "rename." Both are just changing where a name points.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Prof. Teeters moment
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Why These Commands Matter</h2>
+
+            <p class="mb-2">I was practicing — running <code>cp</code>, <code>mv</code>, <code>cat</code>, <code>less</code> — working through the commands Copilot had outlined in Station 1. Prof. Teeters walked by, noticed what I was doing, and paused for exactly one sentence.</p>
+
+            <p>"The terminal was here before agents, HAP. Today's best engineers still know the tools themselves."</p>
+
+            <p class="mt-1">She moved on. But I sat with that for a minute. I had been learning these commands to understand Copilot. But that was backwards. I should be learning them because I am a developer. The tools are mine, not my agent's.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: rm — the dangerous one, Grace's intervention
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Removing Files — The Dangerous One</h2>
+
+            <p class="mb-2">The command is <code>rm</code>. I ran it on a test file I had created.</p>
+
+            <CodeBlock code={`rm scratch-test.txt`} lang="bash" />
+
+            <p class="mt-1">Gone. No confirmation dialog. No trash can. No undo. I ran <code>ls</code> and the file was not there. The terminal believed me completely.</p>
+
+            <p class="mt-1">I got curious. I had read about flags, and I wanted to see what <code>rm</code> could do with them. I typed:</p>
+
+            <CodeBlock code={`rm -rf`} lang="bash" />
+
+            <p class="mt-1">I had not pressed Enter yet. I was going to add a directory name. But before I could finish —</p>
+
+            <div class="hap-note-callout" style="border-left: 4px solid hsl(0, 84%, 60%);">
+                <div class="hap-note-content">
+                    <h3>Grace Hopper turned around.</h3>
+                    <p>She had been watching. She walked over.</p>
+                    <p>"Stop. What you have typed will recursively delete everything in that directory and everything inside it. There is no recovery. I have seen it delete entire projects."</p>
+                    <p>"Type <code>pwd</code> first. Read what you are about to remove. Then decide."</p>
+                    <p>I checked pwd — I was pointed at the project root. I cleared the command. Changed to a sandbox directory. Ran it safely.</p>
+                    <p>"Thank you, Grace."</p>
+                    <p>"You are welcome, HAP. The flag <code>-r</code> means recursive. The flag <code>-f</code> means force — no confirmation. Together they are efficient and unforgiving. Use them only when you are certain."</p>
+                    <p>She returned to her terminal.</p>
+                </div>
+            </div>
+
+            <p class="mt-1">That was the only time in the entire lab that Grace left her terminal. I will not forget it.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         HAP's Confession
+         ============================================================ -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by broken code with an embarrassed expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession:</h3>
+                <ul>
+                    <li>I ran <code>cat</code> on a minified JavaScript file — one line, 47,000 characters. Grace sighed. 😳</li>
+                    <li>I used <code>mv</code> thinking it was copy — original gone, had to rebuild from VS Code local history. Lesson: commit often.</li>
+                    <li>I almost ran <code>rm -rf</code> on the project root. Grace turned around.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Quick Reference
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">Station 2 Quick Reference</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3><code>cat</code> — read a file</h3>
+                    <p>Prints the entire file to the screen. Best for short files. For anything longer than a screenful, use <code>less</code>.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3><code>less</code> — read a file, paginated</h3>
+                    <p>Arrow keys to scroll, spacebar to page down, <code>q</code> to quit. Use this for anything longer than a few lines.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3><code>cp source destination</code> — copy a file</h3>
+                    <p>Creates a duplicate. The original stays exactly where it is.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3><code>mv source destination</code> — move or rename</h3>
+                    <p>Moves a file to a new location. Same directory with a new name? That is a rename. There is no separate rename command.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3><code>rm file</code> — remove a file (permanent)</h3>
+                    <p>No trash. No undo. No confirmation unless you add <code>-i</code>. The flags <code>-r</code> (recursive) and <code>-f</code> (force) are powerful and unforgiving.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">6</div>
+                <div>
+                    <h3>Flags and <code>--help</code></h3>
+                    <p>Single dash for short flags (<code>-f</code>), double dash for long flags (<code>--follow</code>). Almost every command supports <code>--help</code> — the terminal can explain itself.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="mt-2">For find, grep, and more tools worth knowing, I put together a <a href="/cli-cheat-sheet/">cheat sheet</a>.</p>
+
+        <p class="mt-1">The terminal does not protect you from yourself. That is not a flaw — it is respect. It assumes you know what you are doing. Station 2 taught me to deserve that assumption.</p>
+
+        <p class="mt-1"><strong>Next: the terminal stops being local.</strong></p>
+
+        <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+    </section>
+
+</StationLayout>
