@@ -3,9 +3,13 @@
  * Station 5 - The Terminal Gets a Brain
  * HAP's Learning Lab: Living in the Terminal
  *
- * Topics: MCP servers, CLI vs MCP tradeoffs, Lighthouse audit
+ * Topics: MCP servers, CLI vs MCP tradeoffs, Netlify CLI demo
  * Characters: Grace Hopper (1 moment — overhearing)
  * No Prof. Teeters this station. No Copilot interview.
+ *
+ * REWRITE NOTE: Lighthouse removed — CLI output was fabricated.
+ * Replaced with Netlify (honest CLI vs MCP comparison).
+ * Playwright "no CLI equivalent" claim corrected.
  */
 
 import StationLayout from '../../layouts/StationLayout.astro';
@@ -15,7 +19,7 @@ const introContent = `
     <p><strong>Welcome to Station 5!</strong> Station 3 taught me tools — commands that reach out to servers, APIs, the network. Station 4 taught me context — how the agent understands what I am working on and why. Station 5 is the place where those two ideas meet.</p>
     <p class="mt-1">What if the agent could use the terminal's tools directly? Not by me typing commands and pasting output — but by having a structured way to call tools on its own. That is what MCP servers are. They give the agent hands.</p>
     <p class="mt-1">There is even a server called Context7 whose only job is giving the agent current documentation — because the agent needs help knowing things too. That one connected a lot of dots for me.</p>
-    <p class="mt-1">I explored three MCP servers, ran a real audit against a live site, and learned a tradeoff that I think every developer needs to understand right now. 🟠</p>
+    <p class="mt-1">I explored three MCP servers, compared each one to its CLI counterpart, and learned a tradeoff that I think every developer needs to understand right now. 🟠</p>
 `;
 ---
 
@@ -23,12 +27,12 @@ const introContent = `
     stationNumber={5}
     title="The Terminal Gets a Brain"
     subtitle="MCP servers, CLI tradeoffs, and knowing when each one wins"
-    description="HAP meets MCP servers, runs Lighthouse against the live site, and works through the CLI vs MCP tradeoff honestly."
+    description="HAP meets MCP servers, compares them to their CLI counterparts, and works through the CLI vs MCP tradeoff honestly."
     avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg"
     avatarAlt="HAP at a terminal, evaluating tools"
     introContent={introContent}
     nextStationTitle="AI Assistance for Living in the Terminal"
-    footerReminder="CLI for speed and direct control. MCP when no good CLI equivalent exists. And always: know the tradeoff."
+    footerReminder="CLI for speed and direct control. MCP when the agent needs to act autonomously. And always: measure the tradeoff."
     labName="Living in the Terminal"
 >
 
@@ -46,54 +50,57 @@ HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are pr
 
             <p class="mb-2">MCP stands for Model Context Protocol. It is a way for an agent to call tools through a structured interface instead of raw CLI commands. The agent sends a request, the server does the work, and a structured response comes back. Same idea as an API — but designed for agents, not browsers.</p>
 
-            <p class="mb-2">I looked at three MCP servers. Each one taught me something different about when this protocol earns its overhead — and when it does not.</p>
+            <p class="mb-2">I looked at three MCP servers. Every one of them has a CLI counterpart. That pattern turned out to be the most important thing I learned in this station.</p>
 
             <div class="analysis-grid">
                 <div class="analysis-card">
                     <h3>Playwright</h3>
                     <p><strong>What it is:</strong> A browser controlled by code, not a human. The agent can navigate pages, click buttons, and read content — all without me touching a browser window.</p>
-                    <p class="mt-1"><strong>Why it is here:</strong> In Station 3, I used a simple command to talk to a server. Playwright talks to a browser the same way — full circle.</p>
-                    <p class="mt-1"><strong>The key detail:</strong> There is no CLI equivalent for agent-controlled browsing. This is a case where MCP fills a gap that the terminal cannot. Runs via npx — no Docker needed.</p>
+                    <p class="mt-1"><strong>Why it is here:</strong> In Station 3, I used <code>curl</code> to talk to a server. Playwright talks to a browser the same way — full circle.</p>
+                    <p class="mt-1"><strong>The key detail:</strong> Playwright has both an MCP server (<code>@playwright/mcp</code>, ~114,000 tokens) and a newer CLI (<code>@playwright/cli</code>, ~27,000 tokens) built for AI coding agents. The CLI saves state to disk instead of flooding the context window. Same capability, different cost. That pattern matters.</p>
                 </div>
 
                 <div class="analysis-card">
                     <h3>GitHub</h3>
                     <p><strong>What it is:</strong> Agent-native GitHub access. I already know the <code>gh</code> CLI from Station 3 — this is the agent version of that same capability.</p>
                     <p class="mt-1"><strong>Why it is here:</strong> <code>gh</code> is me typing. GitHub MCP is the agent reading. Same capabilities, different actor.</p>
-                    <p class="mt-1"><strong>The key detail:</strong> I already have <code>gh</code>, so GitHub MCP is not needed for my daily workflow. But for agent automation — reviewing PRs, reading issues, summarizing repos — it is valid. The tradeoff matters though, and I will get to that.</p>
+                    <p class="mt-1"><strong>The key detail:</strong> I already have <code>gh</code>, so GitHub MCP is not needed for my daily workflow. But for agent automation — reviewing PRs, reading issues, summarizing repos — it is valid. The cost is steep though: ~55,000 tokens to initialize. That is context window space that could hold an entire codebase summary instead.</p>
                 </div>
 
                 <div class="analysis-card">
-                    <h3>Lighthouse</h3>
-                    <p><strong>What it is:</strong> Performance, accessibility, SEO, and best practices audit for any URL. It scores a site across four categories and tells you exactly what to fix.</p>
-                    <p class="mt-1"><strong>Why it is here:</strong> Both CLI and MCP versions exist. This is where the CLI vs MCP question gets most concrete.</p>
-                    <p class="mt-1"><strong>The key detail:</strong> I ran it right here, against a live site. Let me show you.</p>
+                    <h3>Netlify</h3>
+                    <p><strong>What it is:</strong> Deploy, configure, and manage sites. I already know the <code>netlify</code> CLI from Station 3 — I used <code>netlify deploy</code> to put hap-7000 on the internet for the first time.</p>
+                    <p class="mt-1"><strong>Why it is here:</strong> Both CLI and MCP versions exist, and neither is a strict superset of the other. The CLI has capabilities the MCP server does not — like <code>netlify dev</code>, <code>netlify logs</code>, and <code>netlify link</code>. But the MCP server (<code>@netlify/mcp</code>) lets the agent create projects, manage environment variables, and deploy autonomously — things that would take me multiple commands to do myself.</p>
+                    <p class="mt-1"><strong>The key detail:</strong> Netlify MCP costs only ~2,000-4,000 tokens to initialize. Compare that to GitHub's 55,000. Not all MCP servers carry the same overhead — and that changes the tradeoff completely.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-         SECTION 2: Lighthouse CLI run
+         SECTION 2: Netlify CLI vs MCP — concrete comparison
          ============================================================ -->
     <section class="content-section">
         <div class="topic-section">
-            <h2>Running Lighthouse Against a Live Site</h2>
+            <h2>The Same Question, Two Ways</h2>
 
-            <p class="mb-2">I pointed Lighthouse at the hap-7000 site deployed on Netlify. One command:</p>
+            <p class="mb-2">I wanted to check the status of my deployed site. Here is how I did it from the CLI:</p>
 
-            <CodeBlock code={`npx lighthouse https://hap-7000.netlify.app --output=json --quiet`} lang="bash" />
+            <CodeBlock code={`netlify status`} lang="bash" />
 
-            <p class="mt-1">It ran for about twenty seconds. When it finished, four scores appeared:</p>
+            <p class="mt-1">Clean, readable output — my name, the site URL, the team. Done in under a second:</p>
 
-            <CodeBlock code={`Performance:    97
-Accessibility:  92
-Best Practices: 100
-SEO:            91`} lang="text" />
+            <CodeBlock code={`──────────────────────┐
+ Current Netlify User │
+──────────────────────┘
+Name:   Cynthia Teeters
+Email:  cynthiateeters@gmail.com
+Teams:
+  - Cynthia Teeters's team`} lang="text" />
 
-            <p class="mt-1">That is the CLI version. I typed the command, I got the output, I read the scores. Fast and direct.</p>
+            <p class="mt-1">Now imagine the agent doing the same thing through the Netlify MCP server. It sends a structured request, gets a structured response, and can act on the result — deploy a new version, update environment variables, create a project — all without me typing anything.</p>
 
-            <p class="mt-1">But here is where it gets interesting. Give the agent that JSON output, tell it to fix whatever scores below 90, and it knows exactly what to do. The structured data from the CLI becomes the agent's action plan. The CLI did the audit. The agent does the remediation. They work together.</p>
+            <p class="mt-1">Same information. But the CLI gave it to me in a format I can read. The MCP server gives it to the agent in a format it can act on. Different audiences, different strengths.</p>
         </div>
     </section>
 
@@ -104,7 +111,7 @@ SEO:            91`} lang="text" />
         <div class="topic-section">
             <h2>The CLI vs MCP Tradeoff</h2>
 
-            <p class="mb-2">After working with all three servers, I started seeing a pattern. Sometimes the CLI wins. Sometimes MCP wins. The question is always the same: does the overhead earn what you get back?</p>
+            <p class="mb-2">After working with all three servers, I started seeing a pattern. Every MCP server I looked at has a CLI counterpart. The question is never "CLI or MCP" in the abstract — it is always "does this specific overhead earn what I get back in this specific situation?"</p>
 
             <div class="analysis-grid">
                 <div class="analysis-card">
@@ -120,15 +127,15 @@ SEO:            91`} lang="text" />
                 <div class="analysis-card">
                     <h3>MCP wins when</h3>
                     <ul>
-                        <li>No good CLI equivalent exists (like Playwright)</li>
                         <li>You want the agent to act on its own — delegation</li>
                         <li>The workflow has multiple steps that need coordination</li>
                         <li>Structured responses matter more than raw speed</li>
+                        <li>The MCP server offers capabilities the CLI does not</li>
                     </ul>
                 </div>
             </div>
 
-            <p class="mt-2">Right now, CLI often wins on speed and context efficiency. GitHub MCP alone costs around 55,000 tokens to load — and that is before the agent does a single thing with it. That is context window space that could hold your entire codebase summary instead.</p>
+            <p class="mt-2">The overhead varies wildly. Netlify MCP: ~2,000-4,000 tokens. Playwright CLI: ~27,000 tokens. GitHub MCP: ~55,000 tokens. Playwright MCP: ~114,000 tokens. Knowing those numbers is not optional — it is the whole point.</p>
         </div>
     </section>
 
