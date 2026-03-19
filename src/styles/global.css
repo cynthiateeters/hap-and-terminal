@@ -816,20 +816,19 @@ h4 {
   margin: 2rem auto;
   max-width: 800px;
   border: 2px solid var(--soft-orange);
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
-  align-items: flex-start;
   text-align: left;
 }
 
 .intro-hap-image {
-  flex-shrink: 0;
+  align-self: start;
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
 }
 
 .intro-text {
-  flex: 1;
 }
 
 /* HAP Note Callout */
@@ -969,14 +968,17 @@ h4 {
 
 /* Responsive: Stack on mobile, image on right for desktop */
 @media (min-width: 769px) {
-  .intro-box {
-    flex-direction: row-reverse;
+  .intro-box:has(.intro-hap-image) {
+    grid-template-columns: auto 1fr;
   }
 }
 
 @media (max-width: 768px) {
 
-  .intro-box,
+  .intro-box {
+    text-align: center;
+  }
+
   .hap-note-callout {
     flex-direction: column;
     align-items: center;
