@@ -35,6 +35,8 @@ interface Props {
   labName?: string;
   demoUrl?: string;
   demoLabel?: string;
+  cheatSheetUrl?: string;
+  cheatSheetTitle?: string;
 }
 
 const {
@@ -51,6 +53,8 @@ const {
   labName = "Your Learning Lab Topic",
   demoUrl,
   demoLabel,
+  cheatSheetUrl,
+  cheatSheetTitle,
 } = Astro.props;
 
 // Auto-calculate navigation based on station number
@@ -94,5 +98,27 @@ const headerTitle = `Station ${stationNumber}: ${title}`;
       <a href={demoUrl} class="demo-banner-link">{demoLabel} →</a>
     </div>
   )}
+  {cheatSheetUrl && cheatSheetTitle && (
+    <div class="cheat-sheet-banner">
+      <p class="cheat-sheet-banner-label">Quick Reference</p>
+      <a href={cheatSheetUrl} class="cheat-sheet-banner-link">
+        <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_80,c_limit/canvas/hap/grace-inventory-icon"
+          alt="" width="80" height="80" decoding="async" loading="eager"
+          class="cheat-sheet-banner-icon" />
+        <span>{cheatSheetTitle} →</span>
+      </a>
+    </div>
+  )}
   <slot />
+  {cheatSheetUrl && cheatSheetTitle && (
+    <div class="cheat-sheet-banner">
+      <p class="cheat-sheet-banner-label">Quick Reference</p>
+      <a href={cheatSheetUrl} class="cheat-sheet-banner-link">
+        <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_80,c_limit/canvas/hap/grace-inventory-icon"
+          alt="" width="80" height="80" decoding="async" loading="lazy"
+          class="cheat-sheet-banner-icon" />
+        <span>{cheatSheetTitle} →</span>
+      </a>
+    </div>
+  )}
 </MainLayout>

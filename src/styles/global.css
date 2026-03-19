@@ -546,6 +546,46 @@ ol li::before {
   text-decoration: underline;
 }
 
+/* Cheat Sheet Banner */
+.cheat-sheet-banner {
+  background: linear-gradient(135deg, hsl(210, 30%, 95%) 0%, hsl(210, 20%, 90%) 100%);
+  border: 1px solid hsl(210, 30%, 82%);
+  border-left: 4px solid hsl(210, 50%, 55%);
+  border-radius: var(--radius);
+  padding: 0.75rem 1.25rem;
+  margin: 1rem auto 1.5rem auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+.cheat-sheet-banner-label {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: hsl(210, 40%, 30%);
+  margin: 0 0 0.35rem 0;
+}
+
+.cheat-sheet-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: hsl(210, 50%, 35%);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.cheat-sheet-banner-link:hover {
+  color: hsl(210, 60%, 45%);
+  text-decoration: underline;
+}
+
+.cheat-sheet-banner-icon {
+  border-radius: 8px;
+  box-shadow: none;
+}
+
 /* Skip link for keyboard accessibility */
 .skip-link {
   position: absolute;
@@ -1143,7 +1183,7 @@ h4 {
 .topic-section {
   background: var(--cream-white);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 2rem);
   margin: 2rem 0;
   box-shadow: var(--shadow-md);
 }
@@ -1276,8 +1316,8 @@ h4 {
 .tips-container {
   background: var(--cream-white);
   border-radius: var(--radius-lg);
-  padding: 2rem;
-  margin: 2rem 0;
+  padding: clamp(1rem, 3vw, 2rem);
+  margin: clamp(1rem, 3vw, 2rem) 0;
   box-shadow: var(--shadow-md);
 }
 
@@ -1521,7 +1561,7 @@ h4 {
 
 /* Content Section Spacing */
 .content-section {
-  margin: 3rem 0;
+  margin: clamp(1.25rem, 3vw, 3rem) 0;
 }
 
 /* Section Headings */
@@ -1869,9 +1909,6 @@ pre {
     padding: 1rem;
   }
 
-  .topic-section {
-    padding: 1.5rem;
-  }
 
   .page-navigation {
     padding: 0 1rem;
