@@ -2,7 +2,7 @@
 /**
  * Hub Page - HAP's Learning Lab: Living in the Terminal
  *
- * The landing page for HAP's third learning lab, where HAP shares
+ * The landing page for HAP's learning lab, where HAP shares
  * the journey of learning to work in the terminal — from basic
  * navigation to AI-assisted workflows.
  */
@@ -10,184 +10,165 @@
 import MainLayout from '../layouts/MainLayout.astro';
 
 const introContent = `
-    <p><strong>Welcome to my third learning lab!</strong> After building my Robot ID Card with JavaScript foundations and control flow, I thought I knew my way around a project. Then Prof. Teeters showed me the terminal, and a whole new world opened up.</p>
-    <p>I used to watch my AI coding agent run commands in the terminal and have no idea what was happening down there. Now I can navigate the file system, manage files, deploy my own site, and even shape how my AI agent behaves — all from that blinking cursor.</p>
+    <p><strong>Welcome to my learning lab!</strong> After building my Robot ID Card with JavaScript foundations and control flow, I thought I knew my way around a project. Then Prof. Teeters showed me the terminal, and a whole new world opened up.</p>
+    <p class="mt-1">I used to watch my AI coding agent run commands in the terminal and have no idea what was happening down there. Now I can navigate the file system, manage files, deploy my own site, and even shape how my AI agent behaves — all from that blinking cursor.</p>
     <p class="mt-1">In these six stations, I'll walk you through everything I learned about living in the terminal. I made plenty of mistakes along the way, and I think those mistakes are some of the best parts of the story. 🟠</p>
 `;
 ---
 
-<MainLayout
-    title="Living in the Terminal | HAP's Learning Lab"
-    description="HAP's third learning lab: learn terminal navigation, file operations, CLI tools, context engineering, and AI-assisted workflows while rebuilding a Robot ID Card."
-    headerTitle="HAP's Learning Lab"
-    headerSubtitle="Living in the Terminal"
-    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg"
-    avatarAlt="HAP at a terminal, focused and ready to learn"
-    introContent={introContent}
-    showIntroImage={true}
-    introImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_240,c_limit/v1/hap-waving_dgzacg.jpg"
-    introImageAlt="HAP waving hello"
-    showNavigation={false}
-    footerReminder="The terminal isn't a scary place — it's where you and your tools meet as equals."
->
-
-    <!--
+<MainLayout title="Living in the Terminal | HAP's Learning Lab" description="HAP's learning lab: learn terminal navigation, file operations, CLI tools, context engineering, and AI-assisted workflows while rebuilding a Robot ID Card." headerTitle="HAP's Learning Lab" headerSubtitle='Living in the Terminal' avatarImage='https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg' avatarAlt='HAP at a terminal, focused and ready to learn' introContent={introContent} showIntroImage={false} showNavigation={false} footerReminder="The terminal isn't a scary place — it's where you and your tools meet as equals.">
+  <!--
     HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
     HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
     -->
 
-    <!-- ============================================================
+  <!-- ============================================================
          About This Lab Section
          4 cards explaining what, how, philosophy, and advice
          ============================================================ -->
-    <section class="content-section">
-        <div class="topic-section">
-            <h2>About This Lab</h2>
+  <section class='content-section'>
+    <div class='topic-section'>
+      <h2>About This Lab</h2>
 
-            <div class="analysis-grid">
-                <div class="analysis-point">
-                    <h3>🔬 What I Learned</h3>
-                    <p>I learned how to navigate the file system, create and manage files, deploy a live website, and configure AI agents — all from the terminal. My Robot ID Card badge went from a local project to a real site at hap-7000.netlify.app.</p>
-                    <p class="mt-1">More than commands, I learned how the terminal connects everything: my code, my tools, and the wider internet.</p>
-                </div>
-
-                <div class="analysis-point">
-                    <h3>🎯 How I Practiced</h3>
-                    <p>I rebuilt my Robot ID Card badge using professional tooling — npm scripts, GitHub CLI, and Netlify deployments. Every station gave me real tasks that built on the last one.</p>
-                    <p class="mt-1">Prof. Teeters encouraged me to try commands, break things, and read the output carefully. Grace kept me precise when precision mattered.</p>
-                </div>
-
-                <div class="analysis-point">
-                    <h3>🎨 My Philosophy</h3>
-                    <p>I believe the terminal is a conversation. You type something, and the system responds. Once I stopped being afraid of that blinking cursor and started reading what came back, everything clicked.</p>
-                    <p class="mt-1">Understanding the terminal made me a better partner for my AI coding agent, not a replacement for it.</p>
-                </div>
-
-                <div class="analysis-point">
-                    <h3>🤔 My Advice</h3>
-                    <p>Don't try to memorize every command. Focus on understanding what a command does and how to find help when you forget the details. I still look things up all the time.</p>
-                    <p class="mt-1">And when something goes wrong, read the error message before anything else. I learned from Prof. Teeters that the answer is usually right there in the output.</p>
-                </div>
-            </div>
+      <div class='analysis-grid analysis-grid--two-col'>
+        <div class='analysis-point'>
+          <h3>🔬 What I Learned</h3>
+          <p>I learned how to navigate the file system, create and manage files, deploy a live website, and configure AI agents — all from the terminal. My Robot ID Card badge went from a local project to a real site at hap-7000.netlify.app.</p>
+          <p class='mt-1'>More than commands, I learned how the terminal connects everything: my code, my tools, and the wider internet.</p>
         </div>
-    </section>
 
-    <!-- ============================================================
+        <div class='analysis-point'>
+          <h3>🎯 How I Practiced</h3>
+          <p>I rebuilt my Robot ID Card badge using professional tooling — npm scripts, GitHub CLI, and Netlify deployments. Every station gave me real tasks that built on the last one.</p>
+          <p class='mt-1'>Prof. Teeters encouraged me to try commands, break things, and read the output carefully. Grace kept me precise when precision mattered.</p>
+        </div>
+
+        <div class='analysis-point'>
+          <h3>🎨 My Philosophy</h3>
+          <p>I believe the terminal is a conversation. You type something, and the system responds. Once I stopped being afraid of that blinking cursor and started reading what came back, everything clicked.</p>
+          <p class='mt-1'>Understanding the terminal made me a better partner for my AI coding agent, not a replacement for it.</p>
+        </div>
+
+        <div class='analysis-point'>
+          <h3>🤔 My Advice</h3>
+          <p>Don't try to memorize every command. Focus on understanding what a command does and how to find help when you forget the details. I still look things up all the time.</p>
+          <p class='mt-1'>And when something goes wrong, read the error message before anything else. I learned from Prof. Teeters that the answer is usually right there in the output.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
          Learning Stations Grid
          6 station cards linking to each station page
          ============================================================ -->
-    <div class="content-container">
-        <section class="content-section">
-            <h2 class="section-heading-centered">Learning Stations</h2>
-            <nav aria-label="Learning stations">
-                <div class="overview-grid">
+  <div class='content-container'>
+    <section class='content-section'>
+      <h2 class='section-heading-centered'>Learning Stations</h2>
+      <nav aria-label='Learning stations'>
+        <div class='overview-grid'>
+          <!-- Station 1 -->
+          <a href='/stations/station1/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>🔍</span> Station 1: The Agent Does Something Mysterious</h3>
+            <p><strong>Focus:</strong> Terminal navigation basics</p>
+            <p class='station-description'>I watched my AI coding agent run commands in the terminal and had no idea what was happening. That curiosity led me to learn <code>pwd</code>, <code>ls</code>, <code>cd</code>, <code>mkdir</code>, and <code>touch</code> — the commands that let me find my way around the file system.</p>
+            <p class='station-cta'>→ Visit Station 1</p>
+          </a>
 
-                    <!-- Station 1 -->
-                    <a href="/stations/station1/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">🔍</span> Station 1: The Agent Does Something Mysterious</h3>
-                        <p><strong>Focus:</strong> Terminal navigation basics</p>
-                        <p class="station-description">I watched my AI coding agent run commands in the terminal and had no idea what was happening. That curiosity led me to learn <code>pwd</code>, <code>ls</code>, <code>cd</code>, <code>mkdir</code>, and <code>touch</code> — the commands that let me find my way around the file system.</p>
-                        <p class="station-cta">→ Visit Station 1</p>
-                    </a>
+          <!-- Station 2 -->
+          <a href='/stations/station2/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>👀</span> Station 2: Reading, Moving, and Removing</h3>
+            <p><strong>Focus:</strong> File operations</p>
+            <p class='station-description'>Once I could navigate, I needed to work with files. I learned <code>cat</code>, <code>less</code>, <code>cp</code>, <code>mv</code>, and <code>rm</code>. This was the station where Grace turned around and started paying attention to what I was doing.</p>
+            <p class='station-cta'>→ Visit Station 2</p>
+          </a>
 
-                    <!-- Station 2 -->
-                    <a href="/stations/station2/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">👀</span> Station 2: Reading, Moving, and Removing</h3>
-                        <p><strong>Focus:</strong> File operations</p>
-                        <p class="station-description">Once I could navigate, I needed to work with files. I learned <code>cat</code>, <code>less</code>, <code>cp</code>, <code>mv</code>, and <code>rm</code>. This was the station where Grace turned around and started paying attention to what I was doing.</p>
-                        <p class="station-cta">→ Visit Station 2</p>
-                    </a>
+          <!-- Station 3 -->
+          <a href='/stations/station3/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>🌐</span> Station 3: The Terminal Reaches Out</h3>
+            <p><strong>Focus:</strong> CLI tools that connect beyond local</p>
+            <p class='station-description'>This is where things got exciting. I used <code>npm run</code>, <code>gh</code>, <code>netlify deploy</code>, and <code>curl</code> to push my work beyond my own machine. My Robot ID Card site went live for the first time, and I could not stop refreshing the page.</p>
+            <p class='station-cta'>→ Visit Station 3</p>
+          </a>
 
-                    <!-- Station 3 -->
-                    <a href="/stations/station3/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">🌐</span> Station 3: The Terminal Reaches Out</h3>
-                        <p><strong>Focus:</strong> CLI tools that connect beyond local</p>
-                        <p class="station-description">This is where things got exciting. I used <code>npm run</code>, <code>gh</code>, <code>netlify deploy</code>, and <code>curl</code> to push my work beyond my own machine. My Robot ID Card site went live for the first time, and I could not stop refreshing the page.</p>
-                        <p class="station-cta">→ Visit Station 3</p>
-                    </a>
+          <!-- Station 4 -->
+          <a href='/stations/station4/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>🧠</span> Station 4: The Terminal Has a Memory</h3>
+            <p><strong>Focus:</strong> Context engineering</p>
+            <p class='station-description'>I discovered that my AI agent reads workspace files like AGENTS.md to understand a project. When I changed what those files said, the agent's behavior changed too. That was the moment I realized I could shape the conversation, not just follow it.</p>
+            <p class='station-cta'>→ Visit Station 4</p>
+          </a>
 
-                    <!-- Station 4 -->
-                    <a href="/stations/station4/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">🧠</span> Station 4: The Terminal Has a Memory</h3>
-                        <p><strong>Focus:</strong> Context engineering</p>
-                        <p class="station-description">I discovered that my AI agent reads workspace files like AGENTS.md to understand a project. When I changed what those files said, the agent's behavior changed too. That was the moment I realized I could shape the conversation, not just follow it.</p>
-                        <p class="station-cta">→ Visit Station 4</p>
-                    </a>
+          <!-- Station 5 -->
+          <a href='/stations/station5/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>⚡</span> Station 5: The Terminal Gets a Brain</h3>
+            <p><strong>Focus:</strong> MCP servers and CLI vs MCP tradeoffs</p>
+            <p class='station-description'>I learned about MCP servers — tools like Playwright, GitHub MCP, and Netlify that give AI agents new abilities. Figuring out when to use a CLI tool versus an MCP server taught me to think about tradeoffs in a new way.</p>
+            <p class='station-cta'>→ Visit Station 5</p>
+          </a>
 
-                    <!-- Station 5 -->
-                    <a href="/stations/station5/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">⚡</span> Station 5: The Terminal Gets a Brain</h3>
-                        <p><strong>Focus:</strong> MCP servers and CLI vs MCP tradeoffs</p>
-                        <p class="station-description">I learned about MCP servers — tools like Playwright, GitHub MCP, and Netlify that give AI agents new abilities. Figuring out when to use a CLI tool versus an MCP server taught me to think about tradeoffs in a new way.</p>
-                        <p class="station-cta">→ Visit Station 5</p>
-                    </a>
+          <!-- Station 6 -->
+          <a href='/stations/station6/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>🏗️</span> Station 6: AI Assistance for Living in the Terminal</h3>
+            <p><strong>Focus:</strong> Being the human architect</p>
+            <p class='station-description'>In the final station, I pulled everything together. I practiced informed approval, built a self-improving loop for my workflow, and learned what it means to be the human architect who guides the AI — not the other way around.</p>
+            <p class='station-cta'>→ Visit Station 6</p>
+          </a>
+        </div>
+      </nav>
+    </section>
+  </div>
 
-                    <!-- Station 6 -->
-                    <a href="/stations/station6/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">🏗️</span> Station 6: AI Assistance for Living in the Terminal</h3>
-                        <p><strong>Focus:</strong> Being the human architect</p>
-                        <p class="station-description">In the final station, I pulled everything together. I practiced informed approval, built a self-improving loop for my workflow, and learned what it means to be the human architect who guides the AI — not the other way around.</p>
-                        <p class="station-cta">→ Visit Station 6</p>
-                    </a>
-
-                </div>
-            </nav>
-        </section>
-    </div>
-
-    <!-- ============================================================
+  <!-- ============================================================
          Reference — Cheat Sheets
          ============================================================ -->
-    <div class="content-container">
-        <section class="content-section">
-            <h2 class="section-heading-centered">Reference</h2>
-            <p style="text-align: center; margin-bottom: 1.5rem;">Quick reference pages for everything I learned across all six stations. Keep them open while you practice.</p>
-            <nav aria-label="Cheat sheets">
-                <div class="overview-grid">
+  <div class='content-container'>
+    <section class='content-section'>
+      <h2 class='section-heading-centered'>Reference</h2>
+      <p style='text-align: center; margin-bottom: 1.5rem;'>Quick reference pages for everything I learned across all six stations. Keep them open while you practice.</p>
+      <nav aria-label='Cheat sheets'>
+        <div class='overview-grid'>
+          <a href='/cheat-sheets/terminal-nav/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>📁</span> Terminal Navigation and Files</h3>
+            <p>pwd, ls, cd, mkdir, touch, cat, less, cp, mv, rm</p>
+          </a>
 
-                    <a href="/cheat-sheets/terminal-nav/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">📁</span> Terminal Navigation and Files</h3>
-                        <p>pwd, ls, cd, mkdir, touch, cat, less, cp, mv, rm</p>
-                    </a>
+          <a href='/cheat-sheets/dev-tools/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>🔧</span> Developer CLI Tools</h3>
+            <p>npm, git, gh, netlify, brew, fd, rg</p>
+          </a>
 
-                    <a href="/cheat-sheets/dev-tools/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">🔧</span> Developer CLI Tools</h3>
-                        <p>npm, git, gh, netlify, brew, fd, rg</p>
-                    </a>
+          <a href='/cheat-sheets/curl/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>🌐</span> curl</h3>
+            <p>Fetch URLs, test APIs, debug responses</p>
+          </a>
 
-                    <a href="/cheat-sheets/curl/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">🌐</span> curl</h3>
-                        <p>Fetch URLs, test APIs, debug responses</p>
-                    </a>
+          <a href='/cheat-sheets/context-engineering/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>🧠</span> Context Engineering</h3>
+            <p>AGENTS.md, instruction files, the self-improving loop</p>
+          </a>
 
-                    <a href="/cheat-sheets/context-engineering/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">🧠</span> Context Engineering</h3>
-                        <p>AGENTS.md, instruction files, the self-improving loop</p>
-                    </a>
+          <a href='/cheat-sheets/mcp-servers/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>⚡</span> MCP Servers</h3>
+            <p>CLI vs MCP tradeoffs, when each one wins</p>
+          </a>
 
-                    <a href="/cheat-sheets/mcp-servers/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">⚡</span> MCP Servers</h3>
-                        <p>CLI vs MCP tradeoffs, when each one wins</p>
-                    </a>
+          <a href='/cheat-sheets/git-survival/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>🛡️</span> Git Survival</h3>
+            <p>Safe commands, dangerous flags, recovery basics</p>
+          </a>
 
-                    <a href="/cheat-sheets/git-survival/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">🛡️</span> Git Survival</h3>
-                        <p>Safe commands, dangerous flags, recovery basics</p>
-                    </a>
+          <a href='/cheat-sheets/error-reading/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>🔍</span> Reading Errors</h3>
+            <p>Signal vs noise, what to copy, what to skip</p>
+          </a>
 
-                    <a href="/cheat-sheets/error-reading/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">🔍</span> Reading Errors</h3>
-                        <p>Signal vs noise, what to copy, what to skip</p>
-                    </a>
-
-                    <a href="/cli-cheat-sheet/" class="insight-card station-card-link">
-                        <h3><span class="insight-icon">📋</span> CLI Cheat Sheet (Complete)</h3>
-                        <p>The original all-in-one reference</p>
-                    </a>
-
-                </div>
-            </nav>
-        </section>
-    </div>
-
+          <a href='/cli-cheat-sheet/' class='insight-card station-card-link'>
+            <h3><span class='insight-icon'>📋</span> CLI Cheat Sheet (Complete)</h3>
+            <p>The original all-in-one reference</p>
+          </a>
+        </div>
+      </nav>
+    </section>
+  </div>
 </MainLayout>
