@@ -13,7 +13,7 @@
 - Perspective shifts ("Think of it like...")
 - Opening guidance for new concepts
 - Validation of HAP's progress
-- **Maximum once per station**
+- **Use sparingly — each appearance should earn its place**
 
 **Voice:**
 
@@ -34,7 +34,6 @@
 
 **Forbidden:**
 
-- Appearing more than once per station
 - Long explanations or lectures
 - Showing frustration
 - Taking over HAP's narrative
@@ -117,7 +116,7 @@
 - Contractions
 - Emojis
 - Lengthy explanations
-- Appearing too frequently
+- Overuse — each appearance should be earned by narrative need
 
 ---
 
@@ -162,16 +161,16 @@ Celebrating a breakthrough?   → HAP (always)
 
 ---
 
-## Frequency limits
+## Frequency guidance
 
-| Character | Maximum per station |
-|-----------|---------------------|
-| HAP | Unlimited (narrator) |
-| Prof. Teeters | 1 appearance |
-| Grace Hopper | 1 appearance (only if needed) |
+| Character     | Guidance                                          |
+| ------------- | ------------------------------------------------- |
+| HAP           | Unlimited (narrator)                              |
+| Prof. Teeters | Sparingly — each appearance should earn its place |
+| Grace Hopper  | Sparingly — only when precision or safety matters |
 
 **Rule:** If both Prof. Teeters AND Grace appear in one station, verify both are truly necessary.
 
 ---
 
-*Full documentation: docs/designing-labs/hap-narrative-and-scene-design.md*
+_Full documentation: docs/designing-labs/hap-narrative-and-scene-design.md_

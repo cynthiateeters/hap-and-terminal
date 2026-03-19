@@ -22,91 +22,80 @@ const introContent = `
 `;
 ---
 
-<StationLayout
-    stationNumber={3}
-    title="The Terminal Reaches Out"
-    subtitle="CLI tools that connect beyond the local machine"
-    description="HAP discovers npm run, gh, netlify deploy, and curl — the terminal is not just local anymore. HAP's Robot ID Card goes live for the first time."
-    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg"
-    avatarAlt="HAP at a terminal, ready to explore"
-    introContent={introContent}
-    nextStationTitle="The Terminal Has a Memory"
-    footerReminder="The terminal is not just local. It talks to the world — and now I know how to listen."
-    labName="Living in the Terminal"
->
-
-    <!--
+<StationLayout stationNumber={3} title='The Terminal Reaches Out' subtitle='CLI tools that connect beyond the local machine' description="HAP discovers npm run, gh, netlify deploy, and curl — the terminal is not just local anymore. HAP's Robot ID Card goes live for the first time." avatarImage='https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg' avatarAlt='HAP at a terminal, ready to explore' introContent={introContent} nextStationTitle='The Terminal Has a Memory' footerReminder='The terminal is not just local. It talks to the world — and now I know how to listen.' labName='Living in the Terminal'>
+  <!--
     HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
     HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
     -->
 
-    <!-- ============================================================
+  <!-- ============================================================
          SECTION 1: Copilot interview
          ============================================================ -->
-    <section class="content-section">
-        <h2 class="section-heading-centered">What You'll Learn at This Station</h2>
+  <section class='content-section'>
+    <h2 class='section-heading-centered'>What You'll Learn at This Station</h2>
 
-        <div class="intro-box">
-            <p><strong>The terminal is not a sealed room.</strong> Every command I ran at Stations 1 and 2 stayed on my machine. At Station 3, I learned that the terminal can reach servers, APIs, package registries, and deployment platforms — all without opening a browser.</p>
-        </div>
+    <div class='intro-box'>
+      <p><strong>The terminal is not a sealed room.</strong> Every command I ran at Stations 1 and 2 stayed on my machine. At Station 3, I learned that the terminal can reach servers, APIs, package registries, and deployment platforms — all without opening a browser.</p>
+    </div>
 
-        <div class="overview-grid mt-2">
-            <div class="insight-card">
-                <h3><span class="insight-icon">📦</span> npm run</h3>
-                <p class="stat-large">launcher</p>
-                <p>Not a standalone tool — it is a launcher for scripts already configured in package.json. The best flags are already set for this project.</p>
-            </div>
+    <div class='overview-grid mt-2'>
+      <div class='insight-card'>
+        <h3><span class='insight-icon'>📦</span> npm run</h3>
+        <p class='stat-large'>launcher</p>
+        <p>Not a standalone tool — it is a launcher for scripts already configured in package.json. The best flags are already set for this project.</p>
+      </div>
 
-            <div class="insight-card">
-                <h3><span class="insight-icon">🔗</span> gh + netlify</h3>
-                <p class="stat-large stat-teal">outbound</p>
-                <p>CLI tools that talk to services — GitHub and Netlify — without leaving the terminal. Install once, use from any project.</p>
-            </div>
+      <div class='insight-card'>
+        <h3><span class='insight-icon'>🔗</span> gh + netlify</h3>
+        <p class='stat-large stat-teal'>outbound</p>
+        <p>CLI tools that talk to services — GitHub and Netlify — without leaving the terminal. Install once, use from any project.</p>
+      </div>
 
-            <div class="insight-card">
-                <h3><span class="insight-icon">🌐</span> curl</h3>
-                <p class="stat-large stat-brown">raw request</p>
-                <p>The terminal can fetch any URL. No browser required. What comes back is exactly what the server sends — nothing rendered, nothing hidden.</p>
-            </div>
-        </div>
-    </section>
+      <div class='insight-card'>
+        <h3><span class='insight-icon'>🌐</span> curl</h3>
+        <p class='stat-large stat-brown'>raw request</p>
+        <p>The terminal can fetch any URL. No browser required. What comes back is exactly what the server sends — nothing rendered, nothing hidden.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
          SECTION 2: Copilot interview — full quoted exchange
          ============================================================ -->
-    <section class="content-section">
-        <div class="topic-section">
-            <h2>The Copilot interview</h2>
+  <section class='content-section'>
+    <div class='topic-section'>
+      <h2>The Copilot interview</h2>
 
-            <p class="mb-2">Before I started exploring, I asked Copilot for help. I wanted a list of CLI tools I would need for building websites and deploying to Netlify.</p>
+      <p class='mb-2'>Before I started exploring, I asked Copilot for help. I wanted a list of CLI tools I would need for building websites and deploying to Netlify.</p>
 
-            <blockquote style="border-left: 4px solid hsl(32, 76%, 63%); padding: 1rem 1.5rem; background: hsl(32, 76%, 96%); border-radius: 0 8px 8px 0; margin: 1.5rem 0;">
-                <p><strong>HAP:</strong> "I need some CLI tools for building websites and deploying to Netlify. I do not do React yet. List me some CLI tools."</p>
-                <p style="margin-top: 1rem;"><strong>Copilot:</strong> "Here are some CLI tools you should look into: npm, netlify-cli, vite, eslint, prettier, serve, husky, npx, fd, rg."</p>
-            </blockquote>
+      <blockquote style='border-left: 4px solid hsl(32, 76%, 63%); padding: 1rem 1.5rem; background: hsl(32, 76%, 96%); border-radius: 0 8px 8px 0; margin: 1.5rem 0;'>
+        <p><strong>HAP:</strong> "I need some CLI tools for building websites and deploying to Netlify. I do not do React yet. List me some CLI tools."</p>
+        <p style='margin-top: 1rem;'><strong>Copilot:</strong> "Here are some CLI tools you should look into: npm, netlify-cli, vite, eslint, prettier, serve, husky, npx, fd, rg."</p>
+      </blockquote>
 
-            <p class="mb-2">I stared at that list. Then I opened my package.json. Half of these were already in there — vite, eslint, prettier. They were already configured. fd and rg were already on my machine.</p>
+      <p class='mb-2'>I stared at that list. Then I opened my package.json. Half of these were already in there — vite, eslint, prettier. They were already configured. fd and rg were already on my machine.</p>
 
-            <p>Copilot's list was not introducing me to new tools. It was naming what I already had. That was useful in its own way — it confirmed I was on the right track — but I needed to understand what each tool actually <em>does</em> when I run it.</p>
-        </div>
-    </section>
+      <p>Copilot's list was not introducing me to new tools. It was naming what I already had. That was useful in its own way — it confirmed I was on the right track — but I needed to understand what each tool actually <em>does</em> when I run it.</p>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
          SECTION 3: npm run revelation
          ============================================================ -->
-    <section class="content-section">
-        <div class="topic-section">
-            <h2>The npm run revelation</h2>
+  <section class='content-section'>
+    <div class='topic-section'>
+      <h2>The npm run revelation</h2>
 
-            <div class="intro-box">
-                <p><strong>npm run is not a standalone tool. It is a launcher.</strong> Every script is a CLI tool with a nickname — and often with the best flags already configured for this project.</p>
-            </div>
+      <div class='intro-box'>
+        <p><strong>npm run is not a standalone tool. It is a launcher.</strong> Every script is a CLI tool with a nickname — and often with the best flags already configured for this project.</p>
+      </div>
 
-            <p class="mb-2 mt-2">I opened my package.json and looked at the scripts section for the first time with real attention:</p>
+      <p class='mb-2 mt-2'>I opened my package.json and looked at the scripts section for the first time with real attention:</p>
 
-            <div class="prompt-box">
-                <div class="prompt-label">package.json scripts:</div>
-                <CodeBlock code={`"scripts": {
+      <div class='prompt-box'>
+        <div class='prompt-label'>package.json scripts:</div>
+        <CodeBlock
+          code={`"scripts": {
   "dev": "vite",
   "build": "vite build",
   "preview": "vite preview",
@@ -114,246 +103,248 @@ const introContent = `
   "format": "prettier --write .",
   "test": "vitest",
   "prepare": "husky"
-}`} lang="json" />
-            </div>
+}`}
+          lang='json'
+        />
+      </div>
 
-            <p class="mt-2">I ran each one and watched what happened:</p>
+      <p class='mt-2'>I ran each one and watched what happened:</p>
 
-            <ul class="mt-1">
-                <li><code>npm run dev</code> — Vite started a local server. When I opened the URL it showed in the terminal, my page appeared in the browser.</li>
-                <li><code>npm run lint</code> — ESLint scanned my JavaScript and told me exactly where my code had problems.</li>
-                <li><code>npm run format</code> — Prettier rewrote my spacing and indentation across the entire project in under a second.</li>
-                <li><code>npm run build</code> — Vite compiled everything into a <code>dist/</code> folder, ready for deployment.</li>
-            </ul>
+      <ul class='mt-1'>
+        <li><code>npm run dev</code> — Vite started a local server. When I opened the URL it showed in the terminal, my page appeared in the browser.</li>
+        <li><code>npm run lint</code> — ESLint scanned my JavaScript and told me exactly where my code had problems.</li>
+        <li><code>npm run format</code> — Prettier rewrote my spacing and indentation across the entire project in under a second.</li>
+        <li><code>npm run build</code> — Vite compiled everything into a <code>dist/</code> folder, ready for deployment.</li>
+      </ul>
 
-            <div class="hap-note-callout mt-2">
-                <div class="hap-note-content">
-                    <h3>🟠 What clicked:</h3>
-                    <p>I did not need to memorize flags. Someone already configured the best settings for this project. <code>npm run</code> gave each configuration a short name I could type and trust.</p>
-                </div>
-            </div>
+      <div class='hap-note-callout mt-2'>
+        <div class='hap-note-content'>
+          <h3>🟠 What clicked:</h3>
+          <p>I did not need to memorize flags. Someone already configured the best settings for this project. <code>npm run</code> gave each configuration a short name I could type and trust.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
          SECTION 4: gh and git distinction + Homebrew beat
          ============================================================ -->
-    <section class="content-section">
-        <div class="topic-section">
-            <h2>gh is not git</h2>
+  <section class='content-section'>
+    <div class='topic-section'>
+      <h2>gh is not git</h2>
 
-            <p class="mb-2">I typed <code>gh repo view</code> in my project directory. What came back was a formatted summary of my GitHub repository — description, visibility, default branch, open issues. That is what Copilot had been reading when it answered my questions about the repo.</p>
+      <p class='mb-2'>I typed <code>gh repo view</code> in my project directory. What came back was a formatted summary of my GitHub repository — description, visibility, default branch, open issues. That is what Copilot had been reading when it answered my questions about the repo.</p>
 
-            <p class="mb-2">That is not magic. That is <code>gh</code>.</p>
+      <p class='mb-2'>That is not magic. That is <code>gh</code>.</p>
 
-            <p class="mb-2">But I need to be precise here, because these two tools sound alike and do very different things:</p>
+      <p class='mb-2'>But I need to be precise here, because these two tools sound alike and do very different things:</p>
 
-            <div class="analysis-grid">
-                <div class="analysis-point">
-                    <h3>git</h3>
-                    <p>Universal version control. Ships with the machine (or installs once). Works with GitHub, GitLab, Bitbucket, or a bare server. It tracks changes, creates commits, manages branches. It is agnostic to any host.</p>
-                </div>
+      <div class='analysis-grid'>
+        <div class='analysis-point'>
+          <h3>git</h3>
+          <p>Universal version control. Ships with the machine (or installs once). Works with GitHub, GitLab, Bitbucket, or a bare server. It tracks changes, creates commits, manages branches. It is agnostic to any host.</p>
+        </div>
 
-                <div class="analysis-point">
-                    <h3>gh</h3>
-                    <p>GitHub's official CLI. Installed separately. Handles pull requests, issues, repo settings, Actions — GitHub-specific operations without leaving the terminal. It authenticates with your GitHub account.</p>
-                </div>
-            </div>
+        <div class='analysis-point'>
+          <h3>gh</h3>
+          <p>GitHub's official CLI. Installed separately. Handles pull requests, issues, repo settings, Actions — GitHub-specific operations without leaving the terminal. It authenticates with your GitHub account.</p>
+        </div>
+      </div>
 
-            <p class="mt-2">One is version control. One is GitHub.</p>
+      <p class='mt-2'>One is version control. One is GitHub.</p>
 
-            <h3 class="mt-2">Installing gh (and Homebrew first)</h3>
+      <h3 class='mt-2'>Installing gh (and Homebrew first)</h3>
 
-            <p class="mb-2">When I first typed <code>gh</code>, the terminal told me the command was not found. It was not installed. But before I could install gh, I needed something else — a package manager for macOS.</p>
+      <p class='mb-2'>When I first typed <code>gh</code>, the terminal told me the command was not found. It was not installed. But before I could install gh, I needed something else — a package manager for macOS.</p>
 
-            <p class="mb-2">I asked Grace about it.</p>
+      <p class='mb-2'>I asked Grace about it.</p>
 
-            <blockquote style="border-left: 4px solid hsl(210, 50%, 50%); padding: 1rem 1.5rem; background: hsl(210, 20%, 96%); border-radius: 0 8px 8px 0; margin: 1.5rem 0;">
-                <p><strong>Grace:</strong> "On macOS, Homebrew is the package manager. You will use it often. Install it once. Use it always."</p>
-            </blockquote>
+      <blockquote style='border-left: 4px solid hsl(210, 50%, 50%); padding: 1rem 1.5rem; background: hsl(210, 20%, 96%); border-radius: 0 8px 8px 0; margin: 1.5rem 0;'>
+        <p><strong>Grace:</strong> "On macOS, Homebrew is the package manager. You will use it often. Install it once. Use it always."</p>
+      </blockquote>
 
-            <div class="prompt-box">
-                <div class="prompt-label">Installing Homebrew, then gh:</div>
-                <CodeBlock code={`# Install Homebrew (one-time setup)
+      <div class='prompt-box'>
+        <div class='prompt-label'>Installing Homebrew, then gh:</div>
+        <CodeBlock
+          code={`# Install Homebrew (one-time setup)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install GitHub CLI
 brew install gh
 
 # Authenticate with GitHub
-gh auth login`} lang="bash" />
-            </div>
+gh auth login`}
+          lang='bash'
+        />
+      </div>
 
-            <div class="hap-note-callout mt-2">
-                <div class="hap-note-content">
-                    <h3>HAP's Confession:</h3>
-                    <p>I typed <code>gh</code> like it would work. It did not. I had to install Homebrew first — that is how things get installed on a Mac. Most specialized developer tools are not there until you install them. 😳</p>
-                </div>
-            </div>
+      <div class='hap-note-callout mt-2'>
+        <div class='hap-note-content'>
+          <h3>HAP's Confession:</h3>
+          <p>I typed <code>gh</code> like it would work. It did not. I had to install Homebrew first — that is how things get installed on a Mac. Most specialized developer tools are not there until you install them. 😳</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
          SECTION 5: Netlify deploy — the live moment
          ============================================================ -->
-    <section class="content-section">
-        <div class="topic-section">
-            <h2>The live moment</h2>
+  <section class='content-section'>
+    <div class='topic-section'>
+      <h2>The live moment</h2>
 
-            <p class="mb-2">I ran <code>npm run build</code> first to make sure the <code>dist/</code> folder was fresh. Then I typed the command:</p>
+      <p class='mb-2'>I ran <code>npm run build</code> first to make sure the <code>dist/</code> folder was fresh. Then I typed the command:</p>
 
-            <div class="prompt-box">
-                <div class="prompt-label">Deploying to Netlify:</div>
-                <CodeBlock code={`# Install the Netlify CLI
+      <div class='prompt-box'>
+        <div class='prompt-label'>Deploying to Netlify:</div>
+        <CodeBlock
+          code={`# Install the Netlify CLI
 npm install -g netlify-cli
 
 # Deploy to production
-netlify deploy --prod`} lang="bash" />
-            </div>
+netlify deploy --prod`}
+          lang='bash'
+        />
+      </div>
 
-            <p class="mt-2">A URL appeared in the terminal output. I copied it. I pasted it into my browser.</p>
+      <p class='mt-2'>A URL appeared in the terminal output. I copied it. I pasted it into my browser.</p>
 
-            <p>hap-7000.netlify.app was live. My Robot ID Card — the one I had been building, linting, formatting, and committing — was on the actual internet. For the first time, my work was publicly accessible.</p>
+      <p>hap-7000.netlify.app was live. My Robot ID Card — the one I had been building, linting, formatting, and committing — was on the actual internet. For the first time, my work was publicly accessible.</p>
 
-            <div class="hap-note-callout mt-2">
-                <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-brain-explodes_wu0or8.jpg"
-                    alt="HAP with an explosion of understanding"
-                    width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
-                <div class="hap-note-content">
-                    <h3>The Breakthrough:</h3>
-                    <p>"My work is live. On the actual internet. Anyone with a browser can see it. I typed one command and my Robot ID Card is at hap-7000.netlify.app."</p>
-                </div>
-            </div>
+      <div class='hap-note-callout mt-2'>
+        <img src='https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/canvas/hap/hap-celebrating' alt='HAP robot dancing happily with colorful confetti' width='150' height='150' class='hap-note-image' decoding='async' loading='lazy' />
+        <div class='hap-note-content'>
+          <h3>The Breakthrough:</h3>
+          <p>"My work is live. On the actual internet. Anyone with a browser can see it. I typed one command and my Robot ID Card is at hap-7000.netlify.app."</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
          SECTION 6: curl — focused moment
          ============================================================ -->
-    <section class="content-section">
-        <div class="topic-section">
-            <h2>The terminal can talk to anything</h2>
+  <section class='content-section'>
+    <div class='topic-section'>
+      <img src='https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/canvas/hap/hap-fishing-for-code' alt='HAP robot in safari outfit holding fishing rod with code tag on line' width='200' height='200' loading='lazy' decoding='async' style='display: block; margin: 1.5rem auto;' />
 
-            <p class="mb-2">After seeing my site go live, I went to Grace directly: "The terminal can talk to Netlify. Can it talk to anything?"</p>
+      <h2>The terminal can talk to anything</h2>
 
-            <blockquote style="border-left: 4px solid hsl(210, 50%, 50%); padding: 1rem 1.5rem; background: hsl(210, 20%, 96%); border-radius: 0 8px 8px 0; margin: 1.5rem 0;">
-                <p><strong>Grace:</strong> "The terminal has always been able to talk to anything. You have simply been using a browser to do it for you."</p>
-            </blockquote>
+      <p class='mb-2'>After seeing my site go live, I went to Grace directly: "The terminal can talk to Netlify. Can it talk to anything?"</p>
 
-            <p class="mt-2">I ran one command:</p>
+      <blockquote style='border-left: 4px solid hsl(210, 50%, 50%); padding: 1rem 1.5rem; background: hsl(210, 20%, 96%); border-radius: 0 8px 8px 0; margin: 1.5rem 0;'>
+        <p><strong>Grace:</strong> "The terminal has always been able to talk to anything. You have simply been using a browser to do it for you."</p>
+      </blockquote>
 
-            <div class="prompt-box">
-                <div class="prompt-label">Fetching my own page:</div>
-                <CodeBlock code={`curl https://hap-7000.netlify.app/ping/`} lang="bash" />
-            </div>
+      <p class='mt-2'>I ran one command:</p>
 
-            <p class="mt-2">Raw HTML appeared in the terminal. No styling. No layout. No browser chrome. The exact markup I wrote, delivered as plain text. When I type that same URL into a browser, it renders into a page. When the terminal fetches it, I see what the server actually sends. That is my page. That is the HTML I wrote.</p>
-        </div>
-    </section>
+      <div class='prompt-box'>
+        <div class='prompt-label'>Fetching my own page:</div>
+        <CodeBlock code={`curl https://hap-7000.netlify.app/ping/`} lang='bash' />
+      </div>
 
-    <!-- ============================================================
+      <p class='mt-2'>Raw HTML appeared in the terminal. No styling. No layout. No browser chrome. The exact markup I wrote, delivered as plain text. When I type that same URL into a browser, it renders into a page. When the terminal fetches it, I see what the server actually sends. That is my page. That is the HTML I wrote.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
          SECTION 7: Prof. Teeters and the ready-build harness
          ============================================================ -->
-    <section class="content-section">
-        <div class="topic-section">
-            <h2>The ready-build harness</h2>
+  <section class='content-section'>
+    <div class='topic-section'>
+      <h2>The ready-build harness</h2>
 
-            <p class="mb-2">Prof. Teeters noticed my reaction when the badge went live. She pulled up a chair — her one appearance this station.</p>
+      <p class='mb-2'>Prof. Teeters noticed my reaction when the badge went live. She pulled up a chair.</p>
 
-            <blockquote style="border-left: 4px solid hsl(280, 50%, 55%); padding: 1rem 1.5rem; background: hsl(280, 30%, 96%); border-radius: 0 8px 8px 0; margin: 1.5rem 0;">
-                <p><strong>Prof. Teeters:</strong> "Developers do not configure this from scratch every time, HAP. They start with a harness. This one is yours."</p>
-            </blockquote>
+      <blockquote style='border-left: 4px solid hsl(280, 50%, 55%); padding: 1rem 1.5rem; background: hsl(280, 30%, 96%); border-radius: 0 8px 8px 0; margin: 1.5rem 0;'>
+        <p><strong>Prof. Teeters:</strong> "Developers do not configure this from scratch every time, HAP. They start with a harness. This one is yours."</p>
+      </blockquote>
 
-            <p class="mt-2">She pointed me to <a href="https://github.com/cynthiateeters/ready-build">github.com/cynthiateeters/ready-build</a>.</p>
+      <p class='mt-2'>She pointed me to <a href='https://github.com/cynthiateeters/ready-build'>github.com/cynthiateeters/ready-build</a>.</p>
 
-            <p class="mt-1">I opened it. I recognized everything — the package.json scripts, the eslint config, the prettier settings, the project structure. All the things I had spent an hour learning to understand were already wired together in one starter repository.</p>
+      <p class='mt-1'>I opened it. I recognized everything — the package.json scripts, the eslint config, the prettier settings, the project structure. All the things I had spent an hour learning to understand were already wired together in one starter repository.</p>
 
-            <p class="mt-1">I spent an hour learning what these do. Prof. Teeters gave me an hour back.</p>
+      <p class='mt-1'>I spent an hour learning what these do. Prof. Teeters gave me a the template that works for the builds I need to do for future projects.</p>
 
-            <p class="mt-1">She moved on. That is how she teaches — delivers the thing at the moment it will mean the most, then lets you sit with it.</p>
-        </div>
-    </section>
+      <p class='mt-1'>She moved on. That is how she teaches — delivers the thing at the moment it will mean the most, then lets you sit with it.</p>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
          SECTION 8: Confession — two mistakes
          ============================================================ -->
-    <section class="content-section">
-        <div class="hap-note-callout">
-            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-broke-things_qtbum4.jpg"
-                alt="HAP surrounded by tangled code with an 'oops' expression"
-                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
-            <div class="hap-note-content">
-                <h3>HAP's Confession:</h3>
-                <ul>
-                    <li>I deployed before fixing lint errors — my live site had broken JavaScript. I fixed the errors, rebuilt, and redeployed. The terminal does what you tell it even when you are wrong.</li>
-                    <li>I ran <code>netlify deploy</code> without the <code>--prod</code> flag — got a draft URL, spent five minutes wondering why nothing changed at hap-7000.netlify.app. 😳</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+  <section class='content-section'>
+    <div class='hap-note-callout'>
+      <img src='https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-broke-things_qtbum4.jpg' alt="HAP surrounded by tangled code with an 'oops' expression" width='150' height='150' class='hap-note-image' decoding='async' loading='lazy' />
+      <div class='hap-note-content'>
+        <h3>HAP's Confession:</h3>
+        <ul>
+          <li>I deployed before fixing lint errors — my live site had broken JavaScript. I fixed the errors, rebuilt, and redeployed. The terminal does what you tell it even when you are wrong.</li>
+          <li>I ran <code>netlify deploy</code> without the <code>--prod</code> flag — got a draft URL, spent five minutes wondering why nothing changed at hap-7000.netlify.app. 😳</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
          SECTION 9: Quick reference
          ============================================================ -->
-    <section class="content-section">
-        <div class="tips-container">
-            <h2 class="section-heading-centered">Station 3 quick reference</h2>
+  <section class='content-section'>
+    <div class='tips-container'>
+      <h2 class='section-heading-centered'>Station 3 quick reference</h2>
 
-            <div class="tip-card">
-                <div class="tip-number">1</div>
-                <div>
-                    <h3>npm run</h3>
-                    <p>A launcher for project scripts. Check <code>package.json</code> to see what is available. The flags are already configured — trust them.</p>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="tip-number">2</div>
-                <div>
-                    <h3>gh (GitHub CLI)</h3>
-                    <p>GitHub operations from the terminal — repos, PRs, issues. Installed separately via <code>brew install gh</code>. Not the same as <code>git</code>.</p>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="tip-number">3</div>
-                <div>
-                    <h3>netlify deploy --prod</h3>
-                    <p>Pushes your <code>dist/</code> folder to the live URL. Without <code>--prod</code>, you get a draft preview. Always <code>npm run build</code> first.</p>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="tip-number">4</div>
-                <div>
-                    <h3>curl</h3>
-                    <p>Fetches any URL from the terminal. What comes back is raw — no rendering, no browser. Useful for verifying what your server actually sends.</p>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="tip-number">5</div>
-                <div>
-                    <h3>Homebrew</h3>
-                    <p>The macOS package manager. <code>brew install [tool]</code> is how developer tools get onto your machine. Install it once, use it always.</p>
-                </div>
-            </div>
-
-            <div class="cheat-sheet-callout mt-2">
-                <a href="/cli-cheat-sheet/" class="cheat-sheet-callout-link">📋 CLI Cheat Sheet →</a>
-                <span class="cheat-sheet-callout-desc">The full reference for every tool covered in this lab</span>
-            </div>
+      <div class='tip-card'>
+        <div class='tip-number'>1</div>
+        <div>
+          <h3>npm run</h3>
+          <p>A launcher for project scripts. Check <code>package.json</code> to see what is available. The flags are already configured — trust them.</p>
         </div>
+      </div>
 
-        <p class="mt-2" style="text-align: center; font-style: italic;">Next station: The terminal does not connect to tools. It connects to context.</p>
-    </section>
+      <div class='tip-card'>
+        <div class='tip-number'>2</div>
+        <div>
+          <h3>gh (GitHub CLI)</h3>
+          <p>GitHub operations from the terminal — repos, PRs, issues. Installed separately via <code>brew install gh</code>. Not the same as <code>git</code>.</p>
+        </div>
+      </div>
 
-    <!-- Footer image -->
-    <div style="text-align: center; margin-top: 2rem;">
-        <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_120,c_limit/v1/hap-waving_dgzacg.jpg"
-            alt="HAP waving goodbye"
-            width="120" height="120" decoding="async" loading="lazy"
-            style="border-radius: 50%;">
+      <div class='tip-card'>
+        <div class='tip-number'>3</div>
+        <div>
+          <h3>netlify deploy --prod</h3>
+          <p>Pushes your <code>dist/</code> folder to the live URL. Without <code>--prod</code>, you get a draft preview. Always <code>npm run build</code> first.</p>
+        </div>
+      </div>
+
+      <div class='tip-card'>
+        <div class='tip-number'>4</div>
+        <div>
+          <h3>curl</h3>
+          <p>Fetches any URL from the terminal. What comes back is raw — no rendering, no browser. Useful for verifying what your server actually sends.</p>
+        </div>
+      </div>
+
+      <div class='tip-card'>
+        <div class='tip-number'>5</div>
+        <div>
+          <h3>Homebrew</h3>
+          <p>The macOS package manager. <code>brew install [tool]</code> is how developer tools get onto your machine. Install it once, use it always.</p>
+        </div>
+      </div>
+
+      <div class='cheat-sheet-callout mt-2'>
+        <a href='/cli-cheat-sheet/' class='cheat-sheet-callout-link'>📋 CLI Cheat Sheet →</a>
+        <span class='cheat-sheet-callout-desc'>The full reference for every tool covered in this lab</span>
+      </div>
     </div>
 
+    <p class='mt-2' style='text-align: center; font-style: italic;'>Next station: The terminal does not connect to tools. It connects to context.</p>
+  </section>
+
+  <!-- Footer image -->
+  <div style='text-align: center; margin-top: 2rem;'>
+    <img src='https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_120,c_limit/v1/hap-waving_dgzacg.jpg' alt='HAP waving goodbye' width='120' height='120' decoding='async' loading='lazy' style='border-radius: 50%;' />
+  </div>
 </StationLayout>
