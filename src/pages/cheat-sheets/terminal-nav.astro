@@ -1,0 +1,261 @@
+---
+/**
+ * Terminal Navigation and Files Cheat Sheet - HAP's Learning Lab
+ *
+ * Commands from Stations 1-2: navigating the file system, creating and
+ * reading files, copying/moving/removing, and the flag system.
+ * Cross-platform: macOS (zsh), Windows (Git Bash), Linux (bash).
+ * Date-stamped March 2026.
+ */
+
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>These are the commands I use every single day.</strong> Navigation and file commands from Stations 1 and 2 — the foundation everything else builds on. I kept getting lost in my file system until Prof. Teeters taught me to always check where I am before doing anything.</p>
+    <p class="mt-1">If you only memorize five commands, make them <code>pwd</code>, <code>ls</code>, <code>cd</code>, <code>mkdir</code>, and <code>cat</code>. Everything else grows from there. 🟠</p>
+`;
+---
+
+<MainLayout
+    title="Terminal Navigation and Files | HAP's Learning Lab"
+    description="HAP's cheat sheet for terminal navigation and file commands — pwd, ls, cd, mkdir, touch, cat, cp, mv, rm, and flags. Cross-platform: macOS, Windows (Git Bash), Linux."
+    headerTitle="HAP's Learning Lab"
+    headerSubtitle="Terminal Navigation and Files"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/canvas/hap/hap-has-tools"
+    avatarAlt="HAP robot holding toolbox full of development tools"
+    introContent={introContent}
+    showNavigation={false}
+    footerReminder="pwd first. ls to confirm. Then act."
+>
+
+    <!--
+    HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+    HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+    -->
+
+    <div class="intro-box">
+        <p><strong>Date-stamped: March 2026.</strong> These core commands have been stable for decades, but new flags and options do appear. When in doubt, run <code>--help</code> on any command to see what it can do right now.</p>
+        <p class="mt-1"><strong>Cross-platform:</strong> All commands here work in bash (Git Bash on Windows) and zsh (macOS). The file paths look different (<code>/Users/hap</code> vs <code>/c/Users/hap</code>), but the commands are the same.</p>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1: Navigation
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Navigation</h2>
+            <p class="mb-2">Before I do anything, I check where I am. Prof. Teeters called this the "orient first" habit — and it has saved me from so many mistakes.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h3>pwd — Print Working Directory</h3>
+                        <p>Where am I right now? This is always my first command in a new terminal.</p>
+                        <CodeBlock code={`pwd
+# /Users/hap/projects/hap-7000`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h3>ls — List Directory Contents</h3>
+                        <p>What is in this directory? I use plain <code>ls</code> for a quick look and <code>ls -la</code> when I need the full picture — hidden files, permissions, timestamps.</p>
+                        <CodeBlock code={`ls             # simple list
+ls -la         # long format + hidden files
+ls -lh         # long format + human-readable sizes`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div>
+                        <h3>cd — Change Directory</h3>
+                        <p>Move around the file system. I always run <code>pwd</code> after <code>cd</code> to confirm I landed where I expected. Prof. Teeters said trust but verify.</p>
+                        <CodeBlock code={`cd projects        # go into projects/
+cd ..              # go up one level
+cd ~               # go to home directory
+cd -               # go back to previous directory
+cd ../..           # go up two levels`} lang="bash" />
+                        <p class="mt-1">The <code>cd -</code> shortcut is one Grace taught me — it toggles between your current and previous directory. I use it constantly when working across two folders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Creating
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Creating Files and Directories</h2>
+            <p class="mb-2">Making new things. I always <code>ls</code> afterward to confirm what I created actually exists where I think it does.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">4</div>
+                    <div>
+                        <h3>mkdir — Make Directory</h3>
+                        <p>Create a new folder. Use <code>-p</code> to create nested directories in one shot.</p>
+                        <CodeBlock code={`mkdir my-project
+mkdir -p src/components/ui   # creates all levels at once
+mkdir "my project"           # quotes if you need spaces`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">5</div>
+                    <div>
+                        <h3>touch — Create a File</h3>
+                        <p>Creates an empty file — or updates the timestamp of an existing one without changing its contents.</p>
+                        <CodeBlock code={`touch index.html
+touch src/styles/main.css
+touch .gitignore             # hidden files start with a dot`} lang="bash" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Reading
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Reading Files</h2>
+            <p class="mb-2">Different tools for different situations. I used to <code>cat</code> everything until Prof. Teeters showed me that a 500-line file scrolling past at full speed teaches you nothing.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">6</div>
+                    <div>
+                        <h3>cat — Display Entire File</h3>
+                        <p>Dumps the whole file to the terminal. Great for short files — overwhelming for long ones.</p>
+                        <CodeBlock code={`cat README.md
+cat package.json`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">7</div>
+                    <div>
+                        <h3>less — Paginated Reading</h3>
+                        <p>Read a file one screen at a time. Press <code>q</code> to quit, <code>/</code> to search, <code>space</code> to page down.</p>
+                        <CodeBlock code={`less package-lock.json
+# space = next page, b = back, q = quit, /text = search`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">8</div>
+                    <div>
+                        <h3>head and tail — Just the Edges</h3>
+                        <p>See just the beginning or end of a file. I use <code>head</code> to peek at CSV headers and <code>tail</code> to check the last few lines of a log.</p>
+                        <CodeBlock code={`head -n 10 file.txt    # first 10 lines
+tail -n 20 file.txt    # last 20 lines
+tail -f server.log     # follow a live log file`} lang="bash" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: File Operations
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>File Operations</h2>
+            <p class="mb-2">Copy, move, remove. Grace's rule for this section: know what you are acting on before you act.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">9</div>
+                    <div>
+                        <h3>cp — Copy a File</h3>
+                        <p>Makes a duplicate. The original stays where it is. Use <code>-r</code> to copy entire directories.</p>
+                        <CodeBlock code={`cp index.html backup.html
+cp -r src/ src-backup/         # copy a whole directory`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">10</div>
+                    <div>
+                        <h3>mv — Move or Rename</h3>
+                        <p>There is no rename command — <code>mv</code> does both jobs. The original is gone after the move.</p>
+                        <CodeBlock code={`mv old-name.js new-name.js     # rename
+mv file.js src/                 # move to src/
+mv *.css styles/                # move all CSS files`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">11</div>
+                    <div>
+                        <h3>rm — Remove a File</h3>
+                        <p>No trash. No undo. No confirmation. This was one of my hardest lessons — I deleted a whole afternoon of work once. Now I always double-check with <code>ls</code> first.</p>
+                        <CodeBlock code={`rm temp.txt
+rm -r old-project/             # remove a directory
+rm -rf node_modules/           # recursive + force — be CERTAIN`} lang="bash" />
+                        <p class="mt-1">Prof. Teeters says: if you are about to type <code>rm -rf</code>, slow down and read the path one more time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: Flags and Help
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Flags and Getting Help</h2>
+
+            <div class="intro-box">
+                <p><strong>Flags modify what a command does.</strong> Single dash for short flags (<code>-f</code>), double dash for long flags (<code>--force</code>). I thought of them as settings dials — same command, different behavior. Almost every command supports <code>--help</code>.</p>
+            </div>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">12</div>
+                    <div>
+                        <h3>--help — Ask the Command</h3>
+                        <p>The command can explain itself. This is how I learned most of the flags on this page.</p>
+                        <CodeBlock code={`ls --help
+cp --help
+mkdir --help`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">13</div>
+                    <div>
+                        <h3>Common flag patterns</h3>
+                        <p>Once I started noticing these patterns, new commands felt less foreign. The same letters tend to mean the same things across different tools.</p>
+                        <CodeBlock code={`-r, --recursive    # apply to subdirectories
+-f, --force        # skip confirmation
+-v, --verbose      # show more detail
+-q, --quiet        # show less detail
+-n, --dry-run      # show what would happen
+-h, --help         # show usage information
+-a, --all          # include hidden items`} lang="bash" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Back to hub
+         ============================================================ -->
+    <section class="content-section" style="text-align: center;">
+        <p><a href="/">← Back to Learning Lab Hub</a></p>
+    </section>
+
+    <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+
+</MainLayout>

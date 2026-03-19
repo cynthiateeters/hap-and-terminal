@@ -1,0 +1,302 @@
+---
+/**
+ * curl Cheat Sheet - HAP's Learning Lab: Living in the Terminal
+ *
+ * A deep-dive reference for curl — fetching URLs, inspecting headers,
+ * sending data, and understanding what the server actually returns.
+ * Content drawn from Station 3 (curl intro) and Station 6 (API auth challenge).
+ * Date-stamped March 2026.
+ */
+
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>This is my curl deep-dive.</strong> I kept reaching for curl during Station 3 and again in Station 6 when I had to authenticate with an API. Every time I thought I understood it, I found another flag. This page is everything I wish I had in one place.</p>
+    <p class="mt-1">curl shows you the raw response — no browser magic, no JavaScript, no rendering. Just what the server sends back. 🟠</p>
+`;
+---
+
+<MainLayout
+    title="curl | HAP's Learning Lab"
+    description="HAP's curl cheat sheet — fetching URLs, headers, POST requests, and API authentication from the terminal."
+    headerTitle="HAP's Learning Lab"
+    headerSubtitle="curl Cheat Sheet"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/canvas/hap/hap-fishing-for-code"
+    avatarAlt="HAP robot fishing for code with a fishing rod"
+    introContent={introContent}
+    showNavigation={false}
+    footerReminder="curl shows you what the server actually sends. No browser magic. Just the truth."
+>
+
+    <!--
+    HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+    HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+    -->
+
+    <div class="intro-box">
+        <p><strong>Date-stamped: March 2026.</strong> curl is one of the most stable tools in the terminal ecosystem, but new flags and protocols do get added. When in doubt, run <code>curl --help all</code> or check the <a href="https://curl.se/docs/manpage.html">official manual</a>.</p>
+        <p class="mt-1"><strong>Cross-platform:</strong> curl is pre-installed on macOS and most Linux distributions. On Windows, it ships with Windows 10+ and is available in Git Bash. The examples here work across all three.</p>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1: Basic Usage
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Basic Usage</h2>
+            <p class="mb-2">The simplest curl command fetches a URL and prints the response to your terminal. No file saved, no browser opened — just raw output.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h3>Fetch and Print</h3>
+                        <p>This is where I started. One command, one URL, and the server's response lands right in the terminal.</p>
+                        <CodeBlock code={`curl https://example.com`} lang="bash" />
+                        <p class="mt-1">The entire HTML of the page prints to stdout. It looks messy — that is what HTML looks like before a browser renders it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Follow Redirects
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Follow Redirects</h2>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h3>The -L Flag</h3>
+                        <p>Many URLs redirect — <code>http</code> to <code>https</code>, short links to full URLs. Without <code>-L</code>, curl stops at the redirect and you get nothing useful. I learned this the hard way when every response came back empty.</p>
+                        <CodeBlock code={`curl -L https://example.com`} lang="bash" />
+                        <p class="mt-1">Prof. Teeters told me: "If curl gives you an empty response, the first thing to try is <code>-L</code>."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Headers Only
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Headers Only</h2>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div>
+                        <h3>The -I Flag</h3>
+                        <p>Sometimes I do not need the body — I just want to know the content type, status code, or caching headers. <code>-I</code> sends a HEAD request and shows only the response headers.</p>
+                        <CodeBlock code={`curl -I https://example.com`} lang="bash" />
+                        <CodeBlock code={`# Example output:
+# HTTP/2 200
+# content-type: text/html; charset=UTF-8
+# content-length: 1256
+# cache-control: max-age=604800`} lang="bash" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Save to File
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Save to File</h2>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">4</div>
+                    <div>
+                        <h3>The -o Flag</h3>
+                        <p>Instead of flooding the terminal, save the response to a file. I use this when downloading assets or saving API responses for later inspection.</p>
+                        <CodeBlock code={`curl -o output.html https://example.com`} lang="bash" />
+                        <p class="mt-1">Use <code>-O</code> (uppercase) to save with the remote filename instead of choosing your own.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: Custom Headers
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Custom Headers</h2>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">5</div>
+                    <div>
+                        <h3>The -H Flag</h3>
+                        <p>This is where curl got real for me in Station 6. APIs need authentication tokens, content types, and other headers. <code>-H</code> lets you add any header you want.</p>
+                        <CodeBlock code={`# Send an authorization header
+curl -H "Authorization: Bearer TOKEN" https://api.github.com/user
+
+# Send multiple headers
+curl -H "Authorization: Bearer TOKEN" \\
+     -H "Accept: application/json" \\
+     https://api.example.com/data`} lang="bash" />
+                        <p class="mt-1">Replace <code>TOKEN</code> with your actual token. Never commit tokens to git — I learned that from Grace, who was very clear about it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: POST Data
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>POST Data</h2>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">6</div>
+                    <div>
+                        <h3>The -X and -d Flags</h3>
+                        <p>GET requests fetch data. POST requests send data. When I needed to create resources through an API, this was the pattern.</p>
+                        <CodeBlock code={`curl -X POST \\
+     -H "Content-Type: application/json" \\
+     -d '{"key":"value"}' \\
+     https://api.example.com/items`} lang="bash" />
+                        <p class="mt-1"><code>-X POST</code> sets the HTTP method. <code>-d</code> sends the data payload. <code>-H</code> tells the server what format the data is in. All three work together.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: What curl Does NOT Do
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What curl Does NOT Do</h2>
+
+            <div class="intro-box">
+                <p>This tripped me up early on. I expected curl to behave like a browser. It does not. Understanding its limits made me better at using it.</p>
+            </div>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>No JavaScript execution</h3>
+                    <p>curl fetches the HTML the server sends. If the page builds its content with JavaScript after loading, curl will not see that content. You get the raw HTML — nothing more.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>No cookies by default</h3>
+                    <p>Browsers store and send cookies automatically. curl does not — unless you tell it to with <code>-b</code> (send cookies) and <code>-c</code> (save cookies).</p>
+                    <CodeBlock code={`# Save cookies to a file
+curl -c cookies.txt https://example.com/login
+
+# Send cookies from a file
+curl -b cookies.txt https://example.com/dashboard`} lang="bash" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>No rendering</h3>
+                    <p>What you see is raw HTTP response text. No layout, no styling, no images. That is the point — you see what the server actually sends, not what the browser interprets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: Common Flags Reference
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Common Flags Reference</h2>
+            <p class="mb-2">The flags I use most often, all in one place.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">-L</div>
+                    <div>
+                        <h3>Follow redirects</h3>
+                        <p>Follow HTTP redirects (301, 302, etc.) until reaching the final destination.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">-o</div>
+                    <div>
+                        <h3>Output to file</h3>
+                        <p>Save the response body to a named file instead of printing to terminal.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">-I</div>
+                    <div>
+                        <h3>Headers only</h3>
+                        <p>Send a HEAD request and display only the response headers.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">-H</div>
+                    <div>
+                        <h3>Custom header</h3>
+                        <p>Add a custom header to the request. Use multiple <code>-H</code> flags for multiple headers.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">-X</div>
+                    <div>
+                        <h3>HTTP method</h3>
+                        <p>Set the request method: GET, POST, PUT, DELETE, PATCH.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">-d</div>
+                    <div>
+                        <h3>Send data</h3>
+                        <p>Send data in the request body. Implies POST unless <code>-X</code> specifies otherwise.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">-s</div>
+                    <div>
+                        <h3>Silent mode</h3>
+                        <p>Hide the progress meter and error messages. Useful in scripts or when piping output to another command.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">-v</div>
+                    <div>
+                        <h3>Verbose</h3>
+                        <p>Show the full request and response conversation — headers sent, headers received, TLS handshake. When something is not working, <code>-v</code> is the first flag I add.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Back to hub
+         ============================================================ -->
+    <section class="content-section" style="text-align: center;">
+        <p><a href="/">← Back to Learning Lab Hub</a></p>
+    </section>
+
+    <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+
+</MainLayout>

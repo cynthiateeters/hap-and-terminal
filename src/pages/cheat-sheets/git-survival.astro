@@ -1,0 +1,311 @@
+---
+/**
+ * Git Survival Guide - HAP's Learning Lab: Living in the Terminal
+ *
+ * Essential git commands, dangerous flags, and the read-before-approve rule.
+ * Content drawn from Station 3 (git basics) and Station 6 (git push --force
+ * lesson on informed approval).
+ * Date-stamped March 2026.
+ */
+
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>This is my git survival guide.</strong> Not a complete reference — just the commands I actually use, the flags that scared me, and the rules Grace drilled into me about reading before approving. If you only learn a few git commands, make them these.</p>
+    <p class="mt-1">Grace said it best: "The terminal does not ask twice. Neither does <code>--force</code>." 🟠</p>
+`;
+---
+
+<MainLayout
+    title="Git Survival Guide | HAP's Learning Lab"
+    description="HAP's git survival guide — essential commands, dangerous flags, recovery basics, and the read-before-approve rule."
+    headerTitle="HAP's Learning Lab"
+    headerSubtitle="Git Survival Guide"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/canvas/hap/grace-stop-hand"
+    avatarAlt="Grace Hopper robot with stop gesture"
+    introContent={introContent}
+    showNavigation={false}
+    footerReminder="Read the command. Understand the flag. Then approve."
+>
+
+    <!--
+    HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+    HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+    -->
+
+    <div class="intro-box">
+        <p><strong>Date-stamped: March 2026.</strong> git itself is very stable, but workflows around it change. GitHub, GitLab, and other hosts add features regularly. The core commands here will not change — the workflows around them might.</p>
+        <p class="mt-1"><strong>Cross-platform:</strong> git works identically on macOS (zsh), Windows (Git Bash), and Linux (bash). It is pre-installed on most macOS and Linux systems. On Windows, installing <a href="https://gitforwindows.org/">Git for Windows</a> gives you both git and Git Bash.</p>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1: The Basics
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Basics</h2>
+            <p class="mb-2">These are the commands I use every single day. They form a cycle: check status, stage changes, commit, push, review history.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h3>git status</h3>
+                        <p>What changed? What is staged? What is not tracked? I run this before every other git command. Prof. Teeters calls it "looking before you leap."</p>
+                        <CodeBlock code={`git status`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h3>git add</h3>
+                        <p>Stage files for the next commit. I prefer adding specific files by name rather than <code>git add .</code> — that way I know exactly what is going in.</p>
+                        <CodeBlock code={`git add index.html           # stage one file
+git add src/styles/main.css  # stage another
+git add .                    # stage everything (use carefully)`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div>
+                        <h3>git commit -m</h3>
+                        <p>Save a snapshot with a message describing what changed and why.</p>
+                        <CodeBlock code={`git commit -m "Add navigation component to header"`} lang="bash" />
+                        <p class="mt-1">Prof. Teeters told me: "Write the message for the person who reads it six months from now — that person might be you."</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">4</div>
+                    <div>
+                        <h3>git push</h3>
+                        <p>Send your commits to the remote repository.</p>
+                        <CodeBlock code={`git push                     # push to tracked branch
+git push -u origin main      # first push, set upstream`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">5</div>
+                    <div>
+                        <h3>git log --oneline</h3>
+                        <p>See recent history — one line per commit. Quick way to confirm your commit landed.</p>
+                        <CodeBlock code={`git log --oneline`} lang="bash" />
+                        <CodeBlock code={`# Example output:
+# a1b2c3d Add navigation component to header
+# e4f5g6h Initial project setup
+# h7i8j9k Initialize repository`} lang="bash" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Branching
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Branching</h2>
+            <p class="mb-2">Branches let you work on features without touching the main code. I think of them as parallel timelines — you can always switch back.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h3>git branch</h3>
+                        <p>List branches or create a new one.</p>
+                        <CodeBlock code={`git branch                   # list all local branches
+git branch feature-nav       # create a new branch`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h3>git checkout -b</h3>
+                        <p>Create a new branch and switch to it in one step. This is the one I use most.</p>
+                        <CodeBlock code={`git checkout -b feature-nav  # create + switch`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div>
+                        <h3>git merge</h3>
+                        <p>Bring changes from one branch into another. Switch to the target branch first.</p>
+                        <CodeBlock code={`git checkout main            # switch to main
+git merge feature-nav        # merge feature into main`} lang="bash" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Dangerous Flags
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Dangerous Flags</h2>
+
+            <div class="intro-box">
+                <p><strong>Grace was very clear about these.</strong> These flags bypass safety mechanisms. They do not ask for confirmation. They do not warn you. They execute immediately and the damage can be permanent. Know them. Respect them. Read the command before you approve it.</p>
+            </div>
+
+            <div class="tips-container">
+                <div class="tip-card" style="border-left: 4px solid hsl(0, 70%, 55%);">
+                    <div class="tip-number">!</div>
+                    <div>
+                        <h3>--force</h3>
+                        <p>Rewrites remote history. If a teammate pushed commits after your last pull, <code>--force</code> destroys their work. No confirmation dialog. No undo button on the remote.</p>
+                        <CodeBlock code={`# DANGEROUS — rewrites remote history
+git push --force
+
+# Safer alternative — fails if remote has new commits
+git push --force-with-lease`} lang="bash" />
+                        <p class="mt-1">Grace said: "Force-push is not collaboration. It is overwriting." If you must force-push, use <code>--force-with-lease</code> — it checks that the remote has not changed since your last fetch.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card" style="border-left: 4px solid hsl(0, 70%, 55%);">
+                    <div class="tip-number">!</div>
+                    <div>
+                        <h3>-D</h3>
+                        <p>Force-delete a branch even if it has unmerged changes. Lowercase <code>-d</code> is safe — it refuses to delete unmerged branches. Uppercase <code>-D</code> does not care.</p>
+                        <CodeBlock code={`git branch -d feature-nav    # safe — refuses if unmerged
+git branch -D feature-nav    # DANGEROUS — deletes regardless`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card" style="border-left: 4px solid hsl(0, 70%, 55%);">
+                    <div class="tip-number">!</div>
+                    <div>
+                        <h3>--hard</h3>
+                        <p>Discards all uncommitted changes permanently. Staged work, unstaged edits — all gone. No recovery from the working directory.</p>
+                        <CodeBlock code={`# DANGEROUS — destroys uncommitted work
+git reset --hard
+
+# Safer — unstages but keeps your changes
+git reset --soft HEAD~1`} lang="bash" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: The Read-Before-Approve Rule
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Read-Before-Approve Rule</h2>
+
+            <div class="intro-box">
+                <p>This is from Station 6, and it changed how I work. When an AI agent suggests a terminal command, or when a script runs a destructive operation — <strong>read the full command before you approve it.</strong></p>
+            </div>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>The terminal does not ask twice</h3>
+                    <p>There is no "Are you sure?" for most destructive commands. <code>--force</code> does not pause. <code>--hard</code> does not confirm. <code>rm -rf</code> does not warn. The command runs the moment you press Enter or click Approve.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Read every flag</h3>
+                    <p>A command might look familiar, but one extra flag changes everything. <code>git push</code> is safe. <code>git push --force</code> is not. The difference is one flag. Read it. Understand it. Then decide.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Informed approval</h3>
+                    <p>When an AI agent proposes a command, it is not enough to trust the agent. You need to understand the command yourself. Prof. Teeters taught me: "Approval without understanding is not approval — it is abdication."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: Recovery Basics
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Recovery Basics</h2>
+            <p class="mb-2">Things go wrong. These two commands have saved me more than once.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h3>git reflog</h3>
+                        <p>Your safety net. Even after a bad reset or a deleted branch, git keeps a log of where HEAD has been. You can find lost commits here.</p>
+                        <CodeBlock code={`git reflog`} lang="bash" />
+                        <CodeBlock code={`# Example output:
+# a1b2c3d HEAD@{0}: reset: moving to HEAD~3
+# e4f5g6h HEAD@{1}: commit: Add navigation component
+# h7i8j9k HEAD@{2}: commit: Initial setup`} lang="bash" />
+                        <p class="mt-1">Found the commit you lost? Restore it:</p>
+                        <CodeBlock code={`git checkout e4f5g6h         # jump to that commit
+git checkout -b recovery     # save it on a new branch`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h3>git stash</h3>
+                        <p>Save your uncommitted work temporarily. Useful when you need to switch branches but are not ready to commit.</p>
+                        <CodeBlock code={`git stash                    # save current changes
+git stash list               # see all stashes
+git stash pop                # restore most recent stash
+git stash drop               # discard most recent stash`} lang="bash" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: Grace's Rules
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Grace's Rules</h2>
+
+            <div class="intro-box">
+                <p>Grace does not repeat herself. She gave me three rules. I wrote them down.</p>
+            </div>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>Always <code>git status</code> before destructive commands</h3>
+                    <p>Before any reset, force-push, or branch deletion — check what state you are in. Know what you are about to affect.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Always check <code>pwd</code></h3>
+                    <p>Running git commands in the wrong directory is a common mistake. Confirm you are in the right repository before you commit, push, or reset.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Read the diff before you push</h3>
+                    <p>Review what you are sending to the remote. <code>git diff</code> shows unstaged changes. <code>git diff --staged</code> shows what is about to be committed. No surprises.</p>
+                    <CodeBlock code={`git diff                     # unstaged changes
+git diff --staged            # staged changes (about to commit)`} lang="bash" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Back to hub
+         ============================================================ -->
+    <section class="content-section" style="text-align: center;">
+        <p><a href="/">← Back to Learning Lab Hub</a></p>
+    </section>
+
+    <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+
+</MainLayout>

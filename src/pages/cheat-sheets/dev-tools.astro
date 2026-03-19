@@ -1,0 +1,246 @@
+---
+/**
+ * Developer CLI Tools Cheat Sheet - HAP's Learning Lab
+ *
+ * Tools from Station 3 plus search tools: npm, git, gh, netlify, brew,
+ * find/fd, grep/rg. Cross-platform install commands included.
+ * Cross-platform: macOS (zsh), Windows (Git Bash), Linux (bash).
+ * Date-stamped March 2026.
+ */
+
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>These are the tools that reach beyond the local file system.</strong> Package managers, version control, deployment, search — each one solves a specific problem, and knowing which tool to reach for is half the battle.</p>
+    <p class="mt-1">Prof. Teeters told me: the right tool is the one you understand. The best tool is the one configured for your project. 🟠</p>
+`;
+---
+
+<MainLayout
+    title="Developer CLI Tools | HAP's Learning Lab"
+    description="HAP's cheat sheet for developer CLI tools — npm, git, gh, netlify, brew, find/fd, grep/rg with cross-platform install commands. macOS, Windows (Git Bash), Linux."
+    headerTitle="HAP's Learning Lab"
+    headerSubtitle="Developer CLI Tools"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/canvas/hap/hap-tools-wave"
+    avatarAlt="HAP robot waving with toolbox"
+    introContent={introContent}
+    showNavigation={false}
+    footerReminder="The right tool is the one you understand. The best tool is the one configured for your project."
+>
+
+    <!--
+    HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+    HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+    -->
+
+    <div class="intro-box">
+        <p><strong>Date-stamped: March 2026.</strong> Developer tools change faster than navigation commands. New versions ship, flags get added, and sometimes a tool gets replaced entirely. Check <code>--version</code> and <code>--help</code> regularly.</p>
+        <p class="mt-1"><strong>Cross-platform:</strong> All commands here work in bash (Git Bash on Windows) and zsh (macOS). Install commands differ by platform — I have noted those where they matter.</p>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1: Package Manager and Scripts
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Package Manager and Scripts</h2>
+            <p class="mb-2">This was my first "aha" moment in Station 3 — <code>npm run</code> is a launcher. Every script in package.json is a CLI tool with a nickname.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">npm</div>
+                    <div>
+                        <h3>Node Package Manager</h3>
+                        <p><code>npm</code> installs dependencies and runs project scripts. The scripts section in <code>package.json</code> is like a menu — I do not need to memorize the underlying commands.</p>
+                        <CodeBlock code={`npm install            # install all dependencies
+npm run dev            # start dev server
+npm run build          # production build
+npm run lint           # run linter
+npm run format         # run formatter
+npm run preview        # preview the build`} lang="bash" />
+                        <p class="mt-1">To see what scripts are available in a project, I run <code>cat package.json</code> and look at the <code>"scripts"</code> section.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Version Control
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Version Control</h2>
+            <p class="mb-2"><code>git</code> tracks changes. <code>gh</code> talks to GitHub. Two different tools, two different jobs — it took me a while to understand the distinction.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">git</div>
+                    <div>
+                        <h3>Version Control</h3>
+                        <p>Universal version control. Pre-installed on most macOS and Linux systems, bundled with Git Bash on Windows. Works with GitHub, GitLab, anything — it is agnostic to the host.</p>
+                        <CodeBlock code={`git status             # what changed?
+git add file.js        # stage a file
+git add .              # stage everything
+git commit -m "msg"    # save a snapshot
+git push               # send to remote
+git pull               # get latest from remote
+git log --oneline      # recent history
+git diff               # see unstaged changes`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">gh</div>
+                    <div>
+                        <h3>GitHub CLI</h3>
+                        <p>GitHub-specific — for PRs, issues, and repos without leaving the terminal. I think of <code>git</code> as the engine and <code>gh</code> as the GitHub dashboard.</p>
+                        <CodeBlock code={`gh repo view           # see repo info
+gh repo clone owner/repo  # clone a repo
+gh issue list          # list issues
+gh pr create           # create a pull request
+gh pr status           # check PR status
+gh pr checkout 42      # check out PR #42 locally`} lang="bash" />
+                        <p class="mt-1"><strong>Install:</strong></p>
+                        <CodeBlock code={`# macOS
+brew install gh
+# Windows (Git Bash)
+winget install GitHub.cli
+# Linux
+apt install gh`} lang="bash" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Deployment and System Tools
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Deployment and System Tools</h2>
+            <p class="mb-2">Getting code from my machine to the internet, and installing the tools I need to get there.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">netlify</div>
+                    <div>
+                        <h3>Netlify CLI</h3>
+                        <p>Deploy, preview, and manage Netlify sites from the terminal. I like the draft deploy — it lets me see the site before it goes live.</p>
+                        <CodeBlock code={`npm install -g netlify-cli   # install globally
+netlify login              # authenticate
+netlify deploy             # draft deploy (preview)
+netlify deploy --prod      # production deploy
+netlify status             # check connection`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">brew</div>
+                    <div>
+                        <h3>Homebrew (macOS and Linux)</h3>
+                        <p>The package manager for installing CLI tools on macOS. Most of the modern tools on this page — <code>fd</code>, <code>rg</code>, <code>gh</code> — I installed with Homebrew.</p>
+                        <CodeBlock code={`brew install fd            # install a tool
+brew upgrade fd            # update a tool
+brew list                  # see what is installed
+brew search ripgrep        # find a package`} lang="bash" />
+                        <p class="mt-1"><strong>Windows alternative:</strong> <code>winget</code> is built into Windows 11 and serves the same purpose. <strong>Linux alternative:</strong> <code>apt</code> (Debian/Ubuntu) or your distribution's package manager.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Search Tools
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Search Tools</h2>
+            <p class="mb-2">Finding files and finding text inside files — two different jobs, two different tools. The built-in commands (<code>find</code>, <code>grep</code>) work everywhere. The modern alternatives (<code>fd</code>, <code>rg</code>) are faster and friendlier once installed.</p>
+
+            <div class="analysis-grid analysis-grid--two-col">
+                <div class="analysis-point">
+                    <h3>find (files by name)</h3>
+                    <p>Search for files by name or pattern. Built into every system — no install required.</p>
+                    <CodeBlock code={`# find all .js files
+find . -name "*.js"
+
+# find files modified in last 24 hours
+find . -mtime -1
+
+# find empty directories
+find . -type d -empty`} lang="bash" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>fd (faster find)</h3>
+                    <p>A modern alternative to <code>find</code>. Faster, simpler syntax, respects .gitignore by default. Once I started using <code>fd</code>, I never went back.</p>
+                    <CodeBlock code={`# find all .js files
+fd ".js$"
+
+# find files named "config"
+fd config
+
+# find only directories
+fd --type d`} lang="bash" />
+                    <p class="mt-1"><strong>Install:</strong></p>
+                    <CodeBlock code={`# macOS
+brew install fd
+# Windows (Git Bash)
+winget install sharkdp.fd
+# Linux (Debian/Ubuntu)
+apt install fd-find
+# Note: on Linux, binary installs as 'fdfind'
+# Add to your .bashrc or .zshrc:
+alias fd=fdfind`} lang="bash" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>grep (text inside files)</h3>
+                    <p>Search for text patterns inside files. Built into every system — the universal search tool.</p>
+                    <CodeBlock code={`# search for "TODO" in all .js files
+grep -r "TODO" --include="*.js"
+
+# case-insensitive search
+grep -ri "error" src/
+
+# show line numbers
+grep -rn "function" src/`} lang="bash" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>rg (faster grep)</h3>
+                    <p>ripgrep — a modern alternative to <code>grep</code>. Faster, respects .gitignore, better defaults. Prof. Teeters calls it "grep for the modern developer."</p>
+                    <CodeBlock code={`# search for "TODO" in all .js files
+rg "TODO" --type js
+
+# case-insensitive search
+rg -i "error" src/
+
+# show context around matches
+rg -C 3 "function" src/`} lang="bash" />
+                    <p class="mt-1"><strong>Install:</strong></p>
+                    <CodeBlock code={`# macOS
+brew install ripgrep
+# Windows (Git Bash)
+winget install BurntSushi.ripgrep
+# Linux (Debian/Ubuntu)
+apt install ripgrep`} lang="bash" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Back to hub
+         ============================================================ -->
+    <section class="content-section" style="text-align: center;">
+        <p><a href="/">← Back to Learning Lab Hub</a></p>
+    </section>
+
+    <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+
+</MainLayout>

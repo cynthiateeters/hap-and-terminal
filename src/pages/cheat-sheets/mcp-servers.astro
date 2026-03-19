@@ -1,0 +1,243 @@
+---
+/**
+ * MCP Servers Cheat Sheet - HAP's Learning Lab: Living in the Terminal
+ *
+ * Covers Model Context Protocol, three MCP servers (Playwright, GitHub, Netlify),
+ * CLI vs MCP decision framework, and overhead tradeoffs.
+ * Date-stamped March 2026.
+ */
+
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>MCP was the part of Station 5 that surprised me most.</strong> I thought CLI tools were the whole story. Then I learned that agents can call tools directly through a protocol — no terminal, no copy-paste, no human in the middle. But it comes with overhead, and understanding that tradeoff is the real skill.</p>
+    <p class="mt-1">This page captures the framework for deciding when MCP is worth it and when the CLI is the better choice. 🟠</p>
+`;
+---
+
+<MainLayout
+    title="MCP Servers | HAP's Learning Lab"
+    description="HAP's MCP servers cheat sheet — Model Context Protocol, Playwright, GitHub, and Netlify servers, CLI vs MCP tradeoffs for AI-augmented development."
+    headerTitle="HAP's Learning Lab"
+    headerSubtitle="MCP Servers"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/canvas/hap/hap-connecting-plugs"
+    avatarAlt="HAP robot connecting colorful cables together"
+    introContent={introContent}
+    showNavigation={false}
+    footerReminder="CLI for speed. MCP for agent autonomy. Always measure the tradeoff."
+>
+
+    <!--
+    HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+    HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+    -->
+
+    <div class="intro-box">
+        <p><strong>Date-stamped: March 2026.</strong> MCP tooling changes fast. Token costs shift as context windows grow and servers optimize. This page captures the tradeoff framework — the specific numbers will change.</p>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1: What Is MCP?
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What Is MCP?</h2>
+            <p class="mb-2">Model Context Protocol — a structured interface for agents to call tools.</p>
+
+            <div class="intro-box">
+                <p><strong>MCP gives the agent hands.</strong> Without it, the agent can only suggest commands for you to run. With MCP, the agent sends a structured request to a server, the server does the work, and a structured response comes back. The agent never leaves the conversation — it just reaches out, does something, and keeps going.</p>
+                <p class="mt-1">Prof. Teeters compared it to a phone call: the agent dials a number (the MCP server), asks a question (the request), and gets an answer (the response). The agent does not need to walk to the other office.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Three Servers
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Three MCP Servers</h2>
+            <p class="mb-2">Each server connects the agent to a different service. The overhead varies dramatically.</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>Playwright (browser automation)</h3>
+                    <p>Lets the agent control a browser — navigate pages, click elements, fill forms, take screenshots. The MCP version carries <strong>very heavy</strong> context overhead because every interaction sends page content back through the conversation. The CLI alternative is <strong>moderate</strong> overhead and saves results to disk instead of stuffing them into context.</p>
+                    <CodeBlock code={`# CLI approach (moderate overhead)
+npx playwright test
+npx playwright screenshot https://example.com shot.png
+
+# MCP approach (very heavy overhead)
+# Agent controls browser directly through protocol
+# Page content flows into conversation context`} lang="bash" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>GitHub (agent-native access)</h3>
+                    <p>Gives the agent direct access to repos, issues, PRs, and actions. Carries <strong>heavy</strong> context overhead. Overlaps significantly with the <code>gh</code> CLI — many of the same operations are available through both paths.</p>
+                    <CodeBlock code={`# CLI approach (gh)
+gh issue list
+gh pr create --title "Fix bug" --body "Details"
+gh repo view
+
+# MCP approach
+# Agent calls GitHub API through protocol
+# Structured responses, but heavy context per call`} lang="bash" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Netlify (deploy and manage)</h3>
+                    <p>Deploy sites, manage settings, check status. Carries <strong>lightweight</strong> context overhead — responses are small and focused. Important: the CLI and MCP versions are <em>not</em> supersets of each other. Each has capabilities the other lacks.</p>
+                    <CodeBlock code={`# CLI approach
+netlify deploy --prod
+netlify status
+netlify sites:list
+
+# MCP approach
+# Agent deploys and checks status through protocol
+# Lightweight responses, good for multi-step workflows`} lang="bash" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: CLI vs MCP Decision Framework
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>CLI vs MCP Decision Framework</h2>
+            <p class="mb-2">Neither is always better. The question is which one fits the task.</p>
+
+            <div class="analysis-grid analysis-grid--two-col">
+                <div class="analysis-point">
+                    <h3>CLI wins when...</h3>
+                    <p>Speed matters, you want direct control, the task is single-purpose, and you want low overhead.</p>
+                    <CodeBlock code={`# Fast, single-purpose, low overhead
+gh pr list --state open
+netlify deploy --prod
+npx playwright test
+
+# You see the output. You decide the next step.
+# No tokens spent on structured responses.`} lang="bash" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>MCP wins when...</h3>
+                    <p>The agent needs autonomy for multi-step workflows, structured responses enable the next action, or the MCP server offers capabilities the CLI does not have.</p>
+                    <CodeBlock code={`# Multi-step workflow example:
+# 1. Agent checks deploy status (MCP call)
+# 2. If failed, agent reads logs (MCP call)
+# 3. Agent suggests fix based on structured error
+# 4. Agent redeploys (MCP call)
+# No human needed between steps.`} lang="text" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: The Overhead Scale
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Overhead Scale</h2>
+            <p class="mb-2">Not all MCP servers cost the same. I think of it as a scale from lightweight to very heavy.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h3>Lightweight: Netlify MCP</h3>
+                        <p>Small, focused responses. Deploy status, site info, configuration. The context cost per call is low, so the agent can make several calls without bloating the conversation.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h3>Moderate: Playwright CLI</h3>
+                        <p>Running Playwright through the CLI saves results to disk. The agent does not need to hold page content in context — it reads files when needed. A good middle ground for browser testing.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div>
+                        <h3>Heavy: GitHub MCP</h3>
+                        <p>GitHub API responses carry a lot of data — issue bodies, PR diffs, commit histories. Every call adds substantial context. Consider whether <code>gh</code> CLI would accomplish the same task with less overhead.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">4</div>
+                    <div>
+                        <h3>Very heavy: Playwright MCP</h3>
+                        <p>Browser content flowing directly into the conversation. Page HTML, screenshots encoded as data, DOM state — it adds up fast. Use this only when the agent genuinely needs to interact with a page autonomously.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: Grace's Rule
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Grace's Rule</h2>
+
+            <div class="intro-box">
+                <p><strong>"The protocol is not the problem. The question is whether the overhead is justified by what you receive in return."</strong></p>
+                <p class="mt-1">Grace said this when I was frustrated that the Playwright MCP server was using so many tokens. She was right. The protocol works fine — the question is always whether the tradeoff makes sense for the specific task. Sometimes it does. Sometimes the CLI is the better tool. Measure before assuming.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: Best Practices
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Best Practices</h2>
+            <p class="mb-2">What I wish someone had told me before I enabled every MCP server at once.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h3>Disable unused servers</h3>
+                        <p>Every enabled MCP server adds to the agent's tool list, which adds to the system prompt, which adds to the baseline context cost. If I am not using Playwright this session, I turn it off.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h3>Measure before assuming</h3>
+                        <p>I assumed the GitHub MCP server would be faster than the CLI. It was not — for simple tasks, <code>gh</code> was faster and cheaper. The MCP server only paid off for multi-step workflows where the agent needed to chain actions together.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div>
+                        <h3>Prefer CLI for simple tasks</h3>
+                        <p>If the task is "list open PRs" or "deploy to production," the CLI is almost always the right choice. Save MCP for when the agent needs to act autonomously across multiple steps without waiting for you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Back to hub
+         ============================================================ -->
+    <section class="content-section" style="text-align: center;">
+        <p><a href="/">← Back to Learning Lab Hub</a></p>
+    </section>
+
+    <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+
+</MainLayout>

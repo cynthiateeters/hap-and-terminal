@@ -1,0 +1,264 @@
+---
+/**
+ * Context Engineering Cheat Sheet - HAP's Learning Lab: Living in the Terminal
+ *
+ * Covers instruction files (AGENTS.md, copilot-instructions.md),
+ * good vs vague rules, and the self-improving loop.
+ * Date-stamped March 2026.
+ */
+
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>This one changed how I think about AI tools.</strong> I used to think the model was the thing you tuned. Turns out, the model stays the same — what changes is what it reads before it answers. Prof. Teeters calls this context engineering, and once I understood it, every conversation with Copilot got better.</p>
+    <p class="mt-1">This page collects what I learned in Stations 4 and 6. The rules, the files, the loop that makes it all stick. 🟠</p>
+`;
+---
+
+<MainLayout
+    title="Context Engineering | HAP's Learning Lab"
+    description="HAP's context engineering cheat sheet — instruction files, AGENTS.md, good rules vs vague rules, and the self-improving loop for AI-augmented development."
+    headerTitle="HAP's Learning Lab"
+    headerSubtitle="Context Engineering"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/canvas/hap/hap-clipboard-checklist"
+    avatarAlt="HAP robot holding clipboard with checklist and pencil"
+    introContent={introContent}
+    showNavigation={false}
+    footerReminder="You are not changing the model. You are changing what it reads. That is the whole thing."
+>
+
+    <!--
+    HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+    HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+    -->
+
+    <div class="intro-box">
+        <p><strong>Date-stamped: March 2026.</strong> The instruction file landscape is still settling. New tools adopt new conventions. But the principle stays the same: if the agent reads better instructions, it produces better output. Review your instruction files when your tools update.</p>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1: What Is Context Engineering?
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What Is Context Engineering?</h2>
+            <p class="mb-2">The agent reads files to understand your project. Change what it reads, change how it behaves. That is the whole idea.</p>
+
+            <div class="intro-box">
+                <p>I used to think I needed a better model. Prof. Teeters showed me that the model was already good — I was just giving it bad instructions. The agent reads your project files, your instruction files, and your conversation. That collection of text is the <strong>context</strong>. Engineering it means being deliberate about what goes in.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Instruction File Locations
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Instruction File Locations</h2>
+            <p class="mb-2">Different tools read different files. Here is where each one looks.</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>AGENTS.md</h3>
+                    <p>Lives at the project root. Read by the Copilot Coding Agent (GitHub) and Claude Code. This is the broadest instruction file — it shapes how any agent-level tool understands your project.</p>
+                    <CodeBlock code={`# AGENTS.md (project root)
+# Read by: Copilot Coding Agent, Claude Code
+
+## Code style
+- Use const by default. Use let only for reassignment.
+- Never use var.
+- Use textContent over innerHTML.`} lang="markdown" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>.github/copilot-instructions.md</h3>
+                    <p>GitHub Copilot specific. Lives inside the <code>.github/</code> directory. Copilot reads this when generating suggestions in your editor and when the Coding Agent works on issues.</p>
+                    <CodeBlock code={`# .github/copilot-instructions.md
+# Read by: GitHub Copilot (editor + Coding Agent)
+
+## HTML rules
+- Use semantic elements (nav, main, section, article).
+- Every img must have alt text.
+- Labels must be linked to inputs with for/id.`} lang="markdown" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>.instructions.md</h3>
+                    <p>VS Code Copilot workspace-level instructions. This one scopes rules to the workspace you have open, so different projects can have different rules without conflict.</p>
+                    <CodeBlock code={`# .instructions.md (workspace root)
+# Read by: VS Code Copilot
+
+## Communication
+- When explaining, use an analogy before showing code.
+- Explain reasoning before giving the answer.`} lang="markdown" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Good Rules vs Vague Rules
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Good Rules vs Vague Rules</h2>
+            <p class="mb-2">I learned this the hard way. Not all rules are equal. Vague rules waste tokens and change nothing.</p>
+
+            <div class="analysis-grid analysis-grid--two-col">
+                <div class="analysis-point">
+                    <h3>Good rules: specific and testable</h3>
+                    <p>A good rule tells the agent exactly what to do. You could check the output and say yes or no — it followed the rule or it did not.</p>
+                    <CodeBlock code={`# Good: specific, testable
+"Use const by default. Use let only for reassignment. Never use var."
+
+# Good: changes behavior
+"When explaining, use an analogy before showing code."
+
+# Good: clear boundary
+"Use textContent over innerHTML. Sanitize with DOMPurify if HTML is required."`} lang="text" />
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Vague or contradictory rules</h3>
+                    <p>Vague rules like "be helpful" do not change output — the model is already trying to be helpful. Contradictory rules cause inconsistent behavior because the agent has to pick one.</p>
+                    <CodeBlock code={`# Vague: changes nothing
+"Be helpful."
+"Write good code."
+"Follow best practices."
+
+# Contradictory: which one wins?
+"Always use semicolons."
+"Follow Standard JS style."  # (no semicolons)`} lang="text" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Example Rules by Category
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Example Rules by Category</h2>
+            <p class="mb-2">These are real rules I have seen work well. Adapt them for your own projects.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h3>Code Style</h3>
+                        <p>Rules that shape the code the agent writes.</p>
+                        <CodeBlock code={`## Code style
+- Use ES modules (import/export), never CommonJS (require).
+- Use const by default. Use let only for reassignment. Never use var.
+- Use textContent over innerHTML. If HTML is required, sanitize with DOMPurify.
+- Never use eval(), new Function(), or setTimeout with a string argument.`} lang="markdown" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h3>HTML and Accessibility</h3>
+                        <p>Rules that keep markup semantic and accessible.</p>
+                        <CodeBlock code={`## HTML
+- Use semantic elements: nav, main, section, article, aside.
+- Every form input must have a linked label (for/id match).
+- Every img must have descriptive alt text.
+- Maintain 4.5:1 minimum contrast ratio for text.`} lang="markdown" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div>
+                        <h3>Communication</h3>
+                        <p>Rules that shape how the agent explains things to you.</p>
+                        <CodeBlock code={`## Communication
+- When explaining a concept, use an analogy before showing code.
+- Explain your reasoning before giving the final answer.
+- If you are uncertain, say so explicitly.`} lang="markdown" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: The Self-Improving Loop
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Self-Improving Loop</h2>
+            <p class="mb-2">This is the Station 6 idea that tied everything together for me. Your instruction files are not static — they grow as you work.</p>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h3>Error appears</h3>
+                        <p>Something breaks. The agent made a mistake, or I made a mistake the agent could have caught.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h3>Read the error</h3>
+                        <p>Actually read it. I used to skip error messages. Prof. Teeters taught me that the error is data — the most important data you have right now.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div>
+                        <h3>Fix it and ask the key question</h3>
+                        <p>After fixing the immediate problem, ask: <strong>"Should this be an AGENTS.md rule?"</strong> If the mistake could happen again in a future session, the answer is yes.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">4</div>
+                    <div>
+                        <h3>Draft the rule</h3>
+                        <p>Write a specific, testable rule. Ask the agent to help draft it if you want — it is good at turning "don't do that thing" into a clear instruction.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">5</div>
+                    <div>
+                        <h3>Rule persists across sessions</h3>
+                        <p>The rule lives in a file. Every new session, every new conversation, the agent reads it again. The mistake does not repeat. The harness improved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: Harness Engineering
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Harness Engineering</h2>
+
+            <div class="intro-box">
+                <p><strong>The model stays the same. The harness improves.</strong> Every instruction file, every rule you add, every convention you document — that is the harness. You are not fine-tuning a model. You are engineering the context around it so that the same model produces better results for your specific project.</p>
+                <p class="mt-1">Prof. Teeters put it this way: "The model is a constant. Your instructions are the variable. Invest in the variable." That is context engineering. 🟠</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Back to hub
+         ============================================================ -->
+    <section class="content-section" style="text-align: center;">
+        <p><a href="/">← Back to Learning Lab Hub</a></p>
+    </section>
+
+    <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+
+</MainLayout>
