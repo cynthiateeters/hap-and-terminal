@@ -63,6 +63,8 @@ HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are pr
                 <p>Think of it this way: I am not doing anything magical. I am typing commands into the same zsh session you have open, reading what comes back, and making decisions.</p>
             </blockquote>
 
+            <p class="mt-1"><em>(I found out later that Copilot actually runs in its own terminal session, not the one I had open. But the commands themselves were the same — that part was true.)</em></p>
+
             <p class="mt-1">That last line stuck with me: "I am not doing anything magical." The commands were not secret. They were learnable. I decided to learn them.</p>
         </div>
     </section>
@@ -109,7 +111,7 @@ HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are pr
             <div class="hap-note-callout">
                 <div class="hap-note-content">
                     <h3>Grace Hopper, still not turning around:</h3>
-                    <p>"Copilot said 'zsh session.' The shell depends on your environment. On Windows with Git Bash, you are running bash. Do not assume. Type <code>echo $SHELL</code> if you want to know."</p>
+                    <p>"Copilot said 'zsh session.' The shell depends on your environment. On Windows with Git Bash, you are running bash. Do not assume. Type <code>echo $0</code> if you want to know which shell is running right now."</p>
                 </div>
             </div>
 
@@ -180,7 +182,7 @@ ls
 cd ..
 pwd`} lang="bash" />
 
-            <p class="mt-1">Every time I ran <code>cd</code>, I followed it with <code>pwd</code> to confirm where I landed. And every time, the VS Code sidebar matched. When I was in <code>src</code>, the sidebar highlighted <code>src</code>. When I moved back up, the sidebar reflected that too.</p>
+            <p class="mt-1">Every time I ran <code>cd</code>, I followed it with <code>pwd</code> to confirm where I landed. And every time, the files I saw with <code>ls</code> matched what the VS Code sidebar showed for that folder. The sidebar did not follow me around — it stayed on whatever I had last clicked. But the files were the same files.</p>
 
             <p class="mt-1">Same room. Same files. The terminal is not a separate world — it is another window into the same project. I kept using <code>pwd</code> as my checkpoint between every move until it became automatic.</p>
         </div>
@@ -261,7 +263,7 @@ ls`} lang="bash" />
                     <h3>HAP's Confession:</h3>
                     <ul>
                         <li>I typed <code>mkdir my project</code> and got two folders — one called <code>my</code> and one called <code>project</code>. Spaces split arguments. Use quotes (<code>mkdir "my project"</code>) or hyphens (<code>mkdir my-project</code>).</li>
-                        <li>I tried to <code>cd</code> into a folder that did not exist. The terminal gave me an error: <code>No such file or directory</code>. It is not gentle. It does not guess what you meant.</li>
+                        <li>I tried to <code>cd</code> into a folder that did not exist. The terminal gave me an error: <code>No such file or directory</code>. It is not gentle. In most setups, it does not guess what you meant.</li>
                         <li>I ran <code>touch notes.txt</code> and then could not find the file anywhere. I had not checked where I was with <code>pwd</code>, and I had not confirmed with <code>ls</code>. The file existed — in the wrong directory.</li>
                     </ul>
                 </div>

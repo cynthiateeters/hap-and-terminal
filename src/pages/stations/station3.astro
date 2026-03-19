@@ -16,7 +16,7 @@ import CodeBlock from '../../components/CodeBlock.astro';
 
 const introContent = `
     <p><strong>Welcome to Station 3!</strong> I thought the terminal was a local thing — a place where I move files, run scripts, and talk to my own machine. That changed fast.</p>
-    <p class="mt-1">I asked Copilot for CLI tools I would need. I ran npm run dev and watched a server start. I typed gh repo view and saw my own repository described back to me. Then I ran netlify deploy — and my Robot ID Card appeared on the actual internet.</p>
+    <p class="mt-1">I asked Copilot for CLI tools I would need. I ran npm run dev and watched a server start. I typed gh repo view and saw my own repository described back to me. Then I ran netlify deploy --prod — and my Robot ID Card appeared on the actual internet.</p>
     <p class="mt-1">Prof. Teeters noticed the look on my face. She pulled up a chair and handed me something that made all of it click.</p>
     <p class="mt-1">Let me show you what happens when the terminal reaches out... 🟠</p>
 `;
@@ -54,7 +54,7 @@ const introContent = `
             <div class="insight-card">
                 <h3><span class="insight-icon">📦</span> npm run</h3>
                 <p class="stat-large">launcher</p>
-                <p>Not a command itself — a launcher for scripts already configured in package.json. The best flags are already set for this project.</p>
+                <p>Not a standalone tool — it is a launcher for scripts already configured in package.json. The best flags are already set for this project.</p>
             </div>
 
             <div class="insight-card">
@@ -85,7 +85,7 @@ const introContent = `
                 <p style="margin-top: 1rem;"><strong>Copilot:</strong> "Here are some CLI tools you should look into: npm, netlify-cli, vite, eslint, prettier, serve, husky, npx, fd, rg."</p>
             </blockquote>
 
-            <p class="mb-2">I stared at that list. Then I opened my package.json. Half of these were already in there — vite, eslint, prettier. They were already configured. fd and rg were already on my machine from Station 2.</p>
+            <p class="mb-2">I stared at that list. Then I opened my package.json. Half of these were already in there — vite, eslint, prettier. They were already configured. fd and rg were already on my machine.</p>
 
             <p>Copilot's list was not introducing me to new tools. It was naming what I already had. That was useful in its own way — it confirmed I was on the right track — but I needed to understand what each tool actually <em>does</em> when I run it.</p>
         </div>
@@ -99,7 +99,7 @@ const introContent = `
             <h2>The npm run revelation</h2>
 
             <div class="intro-box">
-                <p><strong>npm run is not a command. It is a launcher.</strong> Every script is a CLI tool with a nickname — and often with the best flags already configured for this project.</p>
+                <p><strong>npm run is not a standalone tool. It is a launcher.</strong> Every script is a CLI tool with a nickname — and often with the best flags already configured for this project.</p>
             </div>
 
             <p class="mb-2 mt-2">I opened my package.json and looked at the scripts section for the first time with real attention:</p>
@@ -120,7 +120,7 @@ const introContent = `
             <p class="mt-2">I ran each one and watched what happened:</p>
 
             <ul class="mt-1">
-                <li><code>npm run dev</code> — Vite started a local server, and my page appeared in the browser without me opening a file.</li>
+                <li><code>npm run dev</code> — Vite started a local server. When I opened the URL it showed in the terminal, my page appeared in the browser.</li>
                 <li><code>npm run lint</code> — ESLint scanned my JavaScript and told me exactly where my code had problems.</li>
                 <li><code>npm run format</code> — Prettier rewrote my spacing and indentation across the entire project in under a second.</li>
                 <li><code>npm run build</code> — Vite compiled everything into a <code>dist/</code> folder, ready for deployment.</li>
@@ -164,7 +164,7 @@ const introContent = `
 
             <h3 class="mt-2">Installing gh (and Homebrew first)</h3>
 
-            <p class="mb-2">When I first typed <code>gh</code>, nothing happened. It was not installed. But before I could install gh, I needed something else — a package manager for macOS.</p>
+            <p class="mb-2">When I first typed <code>gh</code>, the terminal told me the command was not found. It was not installed. But before I could install gh, I needed something else — a package manager for macOS.</p>
 
             <p class="mb-2">I asked Grace about it.</p>
 
@@ -187,7 +187,7 @@ gh auth login`} lang="bash" />
             <div class="hap-note-callout mt-2">
                 <div class="hap-note-content">
                     <h3>HAP's Confession:</h3>
-                    <p>I typed <code>gh</code> like it would work. It did not. I had to install Homebrew first — that is how things get installed on a Mac. Nothing developer-related is there until you put it there. 😳</p>
+                    <p>I typed <code>gh</code> like it would work. It did not. I had to install Homebrew first — that is how things get installed on a Mac. Most specialized developer tools are not there until you install them. 😳</p>
                 </div>
             </div>
         </div>
@@ -339,7 +339,10 @@ netlify deploy --prod`} lang="bash" />
                 </div>
             </div>
 
-            <p class="mt-2" style="text-align: center;"><a href="/cli-cheat-sheet/">View the full CLI cheat sheet</a></p>
+            <div class="cheat-sheet-callout mt-2">
+                <a href="/cli-cheat-sheet/" class="cheat-sheet-callout-link">📋 CLI Cheat Sheet →</a>
+                <span class="cheat-sheet-callout-desc">The full reference for every tool covered in this lab</span>
+            </div>
         </div>
 
         <p class="mt-2" style="text-align: center; font-style: italic;">Next station: The terminal does not connect to tools. It connects to context.</p>

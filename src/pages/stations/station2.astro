@@ -86,7 +86,7 @@ HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are pr
 
             <CodeBlock code={`git --help`} lang="bash" />
 
-            <p class="mt-1">A list of every subcommand and option <code>git</code> supports appeared. Commands I had never seen before. Options I did not know existed. The terminal was not hiding anything from me — I had not thought to ask.</p>
+            <p class="mt-1">A list of the most common subcommands and options <code>git</code> supports appeared. Commands I had never seen before. Options I did not know existed. The terminal was not hiding anything from me — I had not thought to ask.</p>
 
             <p class="mt-1">"The terminal can explain itself." I said it out loud, to no one in particular. For deeper explanations of what specific flags do, Copilot can walk through them in context.</p>
         </div>
@@ -113,7 +113,7 @@ HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are pr
 
             <CodeBlock code={`mv old-name.txt new-name.txt`} lang="bash" />
 
-            <p class="mt-1">There is no separate <code>rename</code> command. Moving a file to a new name in the same directory <em>is</em> renaming. Once I understood that, it made sense — the filesystem does not distinguish between "move" and "rename." Both are just changing where a name points.</p>
+            <p class="mt-1">There is no separate <code>rename</code> command. Moving a file to a new name in the same directory <em>is</em> renaming. Once I understood that, it made sense — within the same disk, the filesystem does not distinguish between "move" and "rename." Both are just changing where a name points.</p>
         </div>
     </section>
 
@@ -155,7 +155,7 @@ HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are pr
                 <div class="hap-note-content">
                     <h3>Grace Hopper turned around.</h3>
                     <p>She had been watching. She walked over.</p>
-                    <p>"Stop. What you have typed will recursively delete everything in that directory and everything inside it. There is no recovery. I have seen it delete entire projects."</p>
+                    <p>"Stop. If you finish that command, it will recursively delete everything in that directory and everything inside it. There is no recovery. I have seen it delete entire projects."</p>
                     <p>"Type <code>pwd</code> first. Read what you are about to remove. Then decide."</p>
                     <p>I checked pwd — I was pointed at the project root. I cleared the command. Changed to a sandbox directory. Ran it safely.</p>
                     <p>"Thank you, Grace."</p>
@@ -243,7 +243,10 @@ HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are pr
             </div>
         </div>
 
-        <p class="mt-2">For find, grep, and more tools worth knowing, I put together a <a href="/cli-cheat-sheet/">cheat sheet</a>.</p>
+        <div class="cheat-sheet-callout mt-2">
+            <a href="/cli-cheat-sheet/" class="cheat-sheet-callout-link">📋 CLI Cheat Sheet →</a>
+            <span class="cheat-sheet-callout-desc">Find, grep, and more tools worth knowing</span>
+        </div>
 
         <p class="mt-1">The terminal does not protect you from yourself. That is not a flaw — it is respect. It assumes you know what you are doing. Station 2 taught me to deserve that assumption.</p>
 

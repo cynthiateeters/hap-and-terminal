@@ -57,21 +57,21 @@ HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are pr
                     <h3>Playwright</h3>
                     <p><strong>What it is:</strong> A browser controlled by code, not a human. The agent can navigate pages, click buttons, and read content — all without me touching a browser window.</p>
                     <p class="mt-1"><strong>Why it is here:</strong> In Station 3, I used <code>curl</code> to talk to a server. Playwright talks to a browser the same way — full circle.</p>
-                    <p class="mt-1"><strong>The key detail:</strong> Playwright has both an MCP server (<code>@playwright/mcp</code>, ~114,000 tokens) and a newer CLI (<code>@playwright/cli</code>, ~27,000 tokens) built for AI coding agents. The CLI saves state to disk instead of flooding the context window. Same capability, different cost. That pattern matters.</p>
+                    <p class="mt-1"><strong>The key detail:</strong> Playwright has both an MCP server (<code>@playwright/mcp</code>, very heavy context cost) and a newer CLI (<code>@playwright/cli</code>, moderate cost) built for AI coding agents. The CLI saves state to disk instead of flooding the context window. Same capability, different cost. That pattern matters.</p>
                 </div>
 
                 <div class="analysis-card">
                     <h3>GitHub</h3>
                     <p><strong>What it is:</strong> Agent-native GitHub access. I already know the <code>gh</code> CLI from Station 3 — this is the agent version of that same capability.</p>
-                    <p class="mt-1"><strong>Why it is here:</strong> <code>gh</code> is me typing. GitHub MCP is the agent reading. Same capabilities, different actor.</p>
-                    <p class="mt-1"><strong>The key detail:</strong> I already have <code>gh</code>, so GitHub MCP is not needed for my daily workflow. But for agent automation — reviewing PRs, reading issues, summarizing repos — it is valid. The cost is steep though: ~55,000 tokens to initialize. That is context window space that could hold an entire codebase summary instead.</p>
+                    <p class="mt-1"><strong>Why it is here:</strong> <code>gh</code> is me typing. GitHub MCP is the agent reading. Overlapping capabilities, different actor.</p>
+                    <p class="mt-1"><strong>The key detail:</strong> I already have <code>gh</code>, so GitHub MCP is not needed for my daily workflow. But for agent automation — reviewing PRs, reading issues, summarizing repos — it is valid. The cost is steep though: it carries a heavy initialization overhead. That is context window space that could hold an entire codebase summary instead.</p>
                 </div>
 
                 <div class="analysis-card">
                     <h3>Netlify</h3>
                     <p><strong>What it is:</strong> Deploy, configure, and manage sites. I already know the <code>netlify</code> CLI from Station 3 — I used <code>netlify deploy</code> to put hap-7000 on the internet for the first time.</p>
                     <p class="mt-1"><strong>Why it is here:</strong> Both CLI and MCP versions exist, and neither is a strict superset of the other. The CLI has capabilities the MCP server does not — like <code>netlify dev</code>, <code>netlify logs</code>, and <code>netlify link</code>. But the MCP server (<code>@netlify/mcp</code>) lets the agent create projects, manage environment variables, and deploy autonomously — things that would take me multiple commands to do myself.</p>
-                    <p class="mt-1"><strong>The key detail:</strong> Netlify MCP costs only ~2,000-4,000 tokens to initialize. Compare that to GitHub's 55,000. Not all MCP servers carry the same overhead — and that changes the tradeoff completely.</p>
+                    <p class="mt-1"><strong>The key detail:</strong> Netlify MCP has a lightweight initialization cost — a small fraction of what GitHub MCP requires. Not all MCP servers carry the same overhead — and that changes the tradeoff completely.</p>
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@ Teams:
                 </div>
             </div>
 
-            <p class="mt-2">The overhead varies wildly. Netlify MCP: ~2,000-4,000 tokens. Playwright CLI: ~27,000 tokens. GitHub MCP: ~55,000 tokens. Playwright MCP: ~114,000 tokens. Knowing those numbers is not optional — it is the whole point.</p>
+            <p class="mt-2">The overhead varies wildly — from lightweight (Netlify MCP) to moderate (Playwright CLI) to heavy (GitHub MCP) to very heavy (Playwright MCP). Understanding where each server falls on that scale is not optional — it is the whole point.</p>
         </div>
     </section>
 
@@ -174,7 +174,7 @@ Teams:
                 <h3>HAP's Confession:</h3>
                 <ul>
                     <li>I plugged in too many MCP servers at once — context window filled with tool descriptions, agent got slower and less accurate. Lesson: if you are not actively using an MCP server, turn it off. 😳</li>
-                    <li>I used GitHub MCP for a simple <code>gh repo view</code> — loaded 55,000 tokens to do a two-second CLI task. The agent worked fine. The overhead was absurd.</li>
+                    <li>I used GitHub MCP for a simple <code>gh repo view</code> — loaded a heavy MCP server to do a two-second CLI task. The agent worked fine. The overhead was absurd.</li>
                 </ul>
             </div>
         </div>
@@ -189,7 +189,10 @@ Teams:
 
             <p class="mb-2">Station 3: tools. Station 4: context. Station 5: structured agent access. The terminal's reach, extended through a richer protocol. Not a replacement — an extension. And one that comes with real costs I need to weigh every time I reach for it.</p>
 
-            <p class="mt-1">I put together a <a href="/cli-cheat-sheet/">cheat sheet</a> that covers the CLI tools I use most.</p>
+            <div class="cheat-sheet-callout mt-1">
+                <a href="/cli-cheat-sheet/" class="cheat-sheet-callout-link">📋 CLI Cheat Sheet →</a>
+                <span class="cheat-sheet-callout-desc">Quick reference for the CLI tools I use most</span>
+            </div>
 
             <p class="mt-1"><strong>Next: Station 6 is the human side of all of this.</strong> The tools are learned. The tradeoffs are understood. What remains is being the architect who holds it together. 🟠</p>
 

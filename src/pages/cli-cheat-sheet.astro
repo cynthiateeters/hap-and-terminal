@@ -173,7 +173,8 @@ brew install fd
 # Windows (Git Bash)
 winget install sharkdp.fd
 # Linux
-apt install fd-find`} lang="bash" />
+apt install fd-find
+# Note: binary installs as 'fdfind' — run: alias fd=fdfind`} lang="bash" />
                 </div>
 
                 <div class="analysis-point">
@@ -232,7 +233,7 @@ npm run format         # run formatter`} lang="bash" />
                     <div class="tip-number">git</div>
                     <div>
                         <h3>Version Control</h3>
-                        <p>Universal. Ships with your machine. Agnostic to any host — works with GitHub, GitLab, anything.</p>
+                        <p>Universal. Available on every platform — pre-installed on most macOS and Linux systems, and bundled with Git Bash on Windows. Agnostic to any host — works with GitHub, GitLab, anything.</p>
                         <CodeBlock code={`git status             # what changed?
 git add file.js        # stage a file
 git commit -m "msg"    # save a snapshot
@@ -269,6 +270,18 @@ apt install gh`} lang="bash" />
 netlify deploy         # draft deploy
 netlify deploy --prod  # production deploy
 netlify status         # check connection`} lang="bash" />
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">curl</div>
+                    <div>
+                        <h3>Fetch URLs from the Terminal</h3>
+                        <p>See exactly what a server sends back — no browser, no rendering, no JavaScript. Useful for testing APIs and debugging responses.</p>
+                        <CodeBlock code={`curl https://example.com
+curl -L https://example.com       # follow redirects
+curl -I https://example.com       # headers only
+curl -H "Authorization: Bearer TOKEN" https://api.github.com/user`} lang="bash" />
                     </div>
                 </div>
             </div>
