@@ -85,11 +85,11 @@ See `docs/reference-cards/hap-voice-card.md` for complete guidelines.
 
 ## Characters
 
-| Character     | Role      | Voice                                                             |
-| ------------- | --------- | ----------------------------------------------------------------- |
-| HAP           | Narrator  | First-person, curious, humble, uses 🟠 emoji                      |
-| Prof. Teeters | Mentor    | Calm, encouraging, uses analogies (max 1 appearance per station)  |
-| Grace Hopper  | Assistant | Precise, no contractions, no emojis (only when precision matters) |
+| Character     | Role      | Voice                                                               |
+| ------------- | --------- | ------------------------------------------------------------------- |
+| HAP           | Narrator  | First-person, curious, humble, uses 🟠 emoji                        |
+| Prof. Teeters | Mentor    | Calm, encouraging, uses analogies (sparingly, earn each appearance) |
+| Grace Hopper  | Assistant | Precise, no contractions, no emojis (only when precision matters)   |
 
 ## CSS requirements
 
@@ -150,7 +150,7 @@ Located in `skills/` directory (run with `/format skillname`):
 - 🔬 Science, research discoveries
 - 😳 After Grace corrects HAP
 
-Rules: Never in code blocks, never as decoration, max 2-3 per station.
+Rules: Never in code blocks, never as decoration. Use sparingly — each one should serve a purpose.
 
 ## Copyright notice
 
