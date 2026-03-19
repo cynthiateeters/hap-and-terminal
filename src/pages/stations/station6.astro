@@ -1,0 +1,402 @@
+---
+/**
+ * Station 6 - AI Assistance for Living in the Terminal
+ * HAP's Learning Lab: Living in the Terminal
+ *
+ * Topics: Human architect role, informed approval, self-improving loop,
+ *         harness engineering, AGENTS.md as correction mechanism
+ * Characters: Grace Hopper (2 moments — overhearing in S3 and S5),
+ *             Prof. Teeters (1 silent in S4 + closing thought in S8)
+ * No Copilot interview this station — HAP references past interactions.
+ *
+ * STRUCTURE NOTE: 8 sections instead of the template's 12.
+ * The 12-section template is designed for code-generation labs.
+ * This station is about the human architect role — not prompt engineering
+ * for code output. See reports/station6-redesign-proposal.md for rationale.
+ */
+
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>Welcome to Station 6!</strong> I spent five stations learning the terminal. Navigation, files, deployment, context engineering, MCP servers. Along the way, a quiet question kept building: why does any of this matter if the agent can do it for me?</p>
+    <p class="mt-1">The answer took a while to arrive. The agent knows what I tell it, reads what I give it, fixes what I point it at. But judgment about whether a fix is right, whether a rule belongs in AGENTS.md, whether a command is being run in the right place — that belongs to me. The agent has the tools. I have the full picture.</p>
+    <p class="mt-1">Station 6 is not how to use AI. It is how to be the architect who uses it well. 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={6}
+    title="AI Assistance for Living in the Terminal"
+    subtitle="You are the architect. The agent is the tool. Know the difference."
+    description="HAP learns to be the human architect — reading errors before pasting them, approving commands with understanding, and building a self-improving system with AGENTS.md."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1/hap-laptop_xiewar.jpg"
+    avatarAlt="HAP at a laptop, thinking carefully before approving a command"
+    introContent={introContent}
+    footerReminder="Read. Understand. Approve. Improve. That is the architect's loop."
+    labName="Living in the Terminal"
+>
+
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+
+    <!-- ============================================================
+         SECTION 1: What You'll Learn — 3 insight cards
+         ============================================================ -->
+    <section class="content-section">
+        <h2 class="section-heading-centered">What You'll Learn</h2>
+
+        <div class="overview-grid mt-2">
+            <div class="insight-card">
+                <h3><span class="insight-icon">⚡</span> Read First, Then Act</h3>
+                <p class="stat-large">Signal, Not Noise</p>
+                <p>Before this lab, a console error or Vite wall felt like crisis. Now it feels like information. Five stations of reading terminal output means I can identify the category of an error — which lets me give the agent exactly what it needs instead of pasting 200 lines and hoping.</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">🎯</span> Approval Is the Job</h3>
+                <p class="stat-large stat-teal">Informed, Not Automatic</p>
+                <p>The agent suggests commands. I approve them. That used to feel like a formality. It is not. It is where terminal knowledge, web dev knowledge, and project context all arrive at the same moment. The agent has two of those three. I have all three.</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">✅</span> Every Correction Compounds</h3>
+                <p class="stat-large stat-brown">System, Not Session</p>
+                <p>When I correct the agent and move on, the lesson lives only in that session. When I correct the agent and update AGENTS.md, the lesson lives in every session from now on. That is the difference between fixing a bug and improving the system.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: What AI Can and Can't Do — Human Architect grid
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What AI Can and Can't Do</h2>
+
+            <p class="mb-2">This is not a list of technical limitations. Everything in the left column is genuinely useful — the agent does these things well. The right column is what only the human architect should decide, because it requires knowing the project's history, the team's conventions, and the consequences of getting it wrong.</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h3>Agent Handles Well</h3>
+                    <ul>
+                        <li>Identifying and fixing known error patterns</li>
+                        <li>Suggesting terminal commands for common tasks</li>
+                        <li>Iterating on code autonomously</li>
+                        <li>Drafting rules for AGENTS.md after correction</li>
+                        <li>Running <code>npm run dev</code> and reading output</li>
+                        <li>Proposing <code>git push --force</code> to resolve rebase</li>
+                        <li>Deploying to Netlify when configured</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>Architect Decides</h3>
+                    <ul>
+                        <li>Whether fix addresses root cause or masks symptom</li>
+                        <li>Whether command is right for this project in this directory right now</li>
+                        <li>Whether direction of iteration still matches project intent</li>
+                        <li>Whether rule is precise enough and belongs in file at all</li>
+                        <li>Which lines in the Vite wall are signal and which are noise</li>
+                        <li>Whether consequences of <code>--force</code> are acceptable for this branch and team</li>
+                        <li>Whether project is actually ready to be public</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: When Everything Goes Red
+         Two error scenarios + confession + Grace
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>When Everything Goes Red</h2>
+
+            <p class="mb-2">The terminal does not sugarcoat errors. That used to scare me. Now I know the fear was about not understanding what I was reading. Five stations later, I can read it. Here is what that looks like in practice.</p>
+
+            <h3 class="mt-3">Scenario 1: Browser Console Error</h3>
+
+            <p class="mt-1">I open DevTools and see a TypeError. Before this lab, that would have been a wall of red text I did not want to look at. Now I can read it — I know the file, the line number, the category of problem. I copy the full error, paste it to the agent, and ask three questions: What caused this? Is this root cause or symptom? Could this break anything else?</p>
+
+            <p class="mt-1">I approve the fix only after I understand it. Not before.</p>
+
+            <h3 class="mt-3">Scenario 2: The Vite Terminal Wall</h3>
+
+            <p class="mt-1">I run <code>npm run dev</code> and the terminal erupts. Dozens of lines. Station 2 taught me signal versus noise. I scan — the actual error is on line 3, the first red line. Everything after it is consequence, not cause. I copy three lines, paste them to the agent. The response is immediate and precise because the agent got signal, not a haystack.</p>
+        </div>
+    </section>
+
+    <!-- Confession for Section 3 -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by broken code with an embarrassed expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession:</h3>
+                <ul>
+                    <li>I pasted 200 lines of Vite output into a prompt. Copilot fixed a deprecation warning three-quarters of the way down — the actual error was on line 2. Signal buried in noise. 😳</li>
+                    <li>I asked Copilot to fix a console error without reading it myself. The fix worked. Three days later I hit the same error in a different file — and had no idea what caused it. I had owned the fix but never the understanding.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grace moment for Section 3 -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <div class="hap-note-content">
+                <h3>Grace Hopper, overhearing:</h3>
+                <p>"The agent does not know which line matters. You do. You have been reading terminal output for five stations. Apply that."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Informed Approval Is the Job
+         Two approval moments — locked count, do not add a third
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Informed Approval Is the Job</h2>
+
+            <p class="mb-2">I barely type terminal commands manually anymore. The agent does most of it. But "reading and approving" is not a formality. It is the job. It is where everything I have learned arrives at a single moment — and the agent does not have all of it.</p>
+
+            <h3 class="mt-3">The Confident Approval</h3>
+
+            <p class="mt-1">The agent suggested <code>rm -rf node_modules && npm install</code> to fix a dependency issue. I read <code>rm -rf</code> and recognized it from Station 2. But I did not panic. I know what <code>node_modules</code> is — every file in it was generated, and every file can be recreated with <code>npm install</code>. The <code>package.json</code> is the recipe. I checked <code>pwd</code> out of habit. Approved confidently.</p>
+
+            <p class="mt-1">Prof. Teeters walked by. She saw my screen. No words needed. Five stations of web dev knowledge and terminal knowledge arriving together. I was proud — not cautious, not reckless. Informed. 🟠</p>
+
+            <h3 class="mt-3">The Hard Lesson</h3>
+
+            <p class="mt-1">I approved <code>git push --force</code> once without understanding it. The terminal completed successfully. No error message. No warning. The damage was invisible — until my teammate found her three commits gone. I had rewritten her history because I clicked approve on a flag I had not read.</p>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>Prof. Teeters:</h3>
+                    <p>"The terminal does not ask twice. Neither does <code>--force</code>."</p>
+                </div>
+            </div>
+
+            <p class="mt-1">I now read the full flag description before approving any <code>--force</code> flag. Every time. Without exception.</p>
+
+            <p class="mt-2">Informed approval is not about distrust. It is about being the person in the loop who has the full picture — code, project, team, consequences — that the agent does not have.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: The Self-Improving Loop
+         Correction pattern, Grace, Boris Cherny, harness engineering
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Self-Improving Loop</h2>
+
+            <p class="mb-2">I noticed a pattern: every correction I gave the agent disappeared when the session ended. Next session, the same class of mistake was possible again. I was correcting but not building anything from my corrections.</p>
+
+            <p class="mt-1">Then I found the loop:</p>
+
+            <ol class="mt-1">
+                <li>Error appears.</li>
+                <li>Read it. Identify the category. Paste the relevant lines — not all 200 — to the agent.</li>
+                <li>Agent suggests a fix. Interrogate it: is this root cause? Could it break something else? Approve or reject.</li>
+                <li>Ask: "What rule should we add to AGENTS.md so this class of mistake does not happen again?"</li>
+                <li>Agent drafts a rule. Read it. Sharpen it if vague. Approve.</li>
+                <li>AGENTS.md grows by one precise rule. That rule is present at the start of every future session.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Grace moment for Section 5 -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <div class="hap-note-content">
+                <h3>Grace Hopper, overhearing:</h3>
+                <p>"You are not fixing a bug. You are improving the system. Those are different work."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="topic-section">
+            <p>There is a discipline to it. AGENTS.md stays around 100 lines — better empty than filled with garbage. I cull it regularly: outdated rules out, vague rules sharpened, duplicates merged. A bloated instruction file buries signal in noise — the same mistake as pasting 200 lines of Vite output.</p>
+
+            <p class="mt-1">There is a name for this now: <strong>harness engineering</strong>. The model stays the same. The harness — the system of rules, constraints, and context around the model — is what improves. Every correction that becomes a rule is a permanent investment. Every correction that does not is spent and gone.</p>
+        </div>
+    </section>
+
+    <!-- Breakthrough for Section 5 -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1/hap-brain-explodes_wu0or8.jpg"
+                alt="HAP with an explosion of understanding"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>The Breakthrough:</h3>
+                <p>"I used to think I was fixing bugs. Then I realized I was building something — a set of rules that makes every future session smarter than the last. Prof. Teeters called it harness engineering. I called it finally feeling like an architect." 🟠</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: HAP's Rules for Working with AI — 6 tip cards
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">HAP's Rules for Working with AI in the Terminal</h2>
+            <p class="mb-2">After everything I have learned across six stations, these are the six rules I follow without exception. They are not suggestions. They are how I work now.</p>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>Read Before You Run</h3>
+                    <p>Every command the agent suggests — <code>rm</code>, <code>curl</code>, <code>git push</code> — deserves one second of human review. I know the terminal now. I use that knowledge every time I see an approval prompt. One second of reading has saved me from more mistakes than any other habit.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>Give Your Shell Context</h3>
+                    <p>OS, shell (Git Bash or zsh), <code>pwd</code> output, exact command, exact error. The agent cannot see my session. I have to be its eyes. The more precise the context, the more precise the help. Vague input produces vague output — every time.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>Never Paste Secrets</h3>
+                    <p><code>.env</code> files, tokens, API keys — these never go in a prompt. I ask about the pattern, not the value. "How do I pass a Bearer token with curl?" is safe. Pasting the actual token is not. This rule has no exceptions.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>Prefer Understanding Over Copying</h3>
+                    <p>I ask "what does this flag do?" before "what command should I run?" — especially with flags I have not seen before. Understanding stacks. Copying does not. The three days I lost to a recurring error I never understood taught me that.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>Verify Destructive Commands Twice</h3>
+                    <p><code>rm</code>, <code>--force</code>, <code>-rf</code> — these are worth an extra read and a <code>pwd</code> check first. The terminal does not have an undo button. Grace taught me that in Station 2 when she walked over for the only time in the entire lab. I have not forgotten.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">6</div>
+                <div>
+                    <h3>Update AGENTS.md When You Correct Something Real</h3>
+                    <p>Every correction that does not become a rule is spent and gone. Every correction that does become a rule pays dividends in every future session. That is harness engineering. That is the architect's job.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: Try It Yourself — curl 401 challenge with reveal
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Try It Yourself: Crafting a Real Debugging Prompt</h2>
+
+            <p class="mt-1">I have a broken <code>curl</code> request. It is returning <code>401 Unauthorized</code>. Your challenge: write the AI prompt I should use to get helpful debugging advice.</p>
+
+            <div class="challenge-box mt-2">
+                <h3>The Situation</h3>
+                <ul class="mt-1">
+                    <li><strong>OS and shell:</strong> Windows with Git Bash (or macOS with zsh)</li>
+                    <li><strong>Endpoint:</strong> <code>https://api.github.com/user</code></li>
+                    <li><strong>Command I ran:</strong> <code>curl https://api.github.com/user</code></li>
+                    <li><strong>Error:</strong> <code>{`{"message": "Requires authentication"}`}</code></li>
+                    <li><strong>What I know:</strong> I have a GitHub personal access token but I am not sure how to pass it with <code>curl</code></li>
+                </ul>
+
+                <p class="mt-2">Write the prompt. Be specific. Include everything the agent needs to help — and nothing it does not.</p>
+            </div>
+
+            <p class="mt-2">"I spent way too long asking 'why is curl not working' when the answer was right there in my error message. Give it a real try before peeking — the difference between a vague prompt and a specific one will be obvious when you see the solution." 🟠</p>
+
+            <button id="reveal-btn-s6"
+                style="display: block; margin: 1.5rem auto; padding: 0.75rem 1.5rem; background: hsl(32, 76%, 50%); color: hsl(0, 0%, 100%); border: none; border-radius: 6px; font-size: 1rem; cursor: pointer;">
+                Show HAP's Solution
+            </button>
+
+            <script>
+                const revealBtn = document.getElementById('reveal-btn-s6');
+                const solutionDiv = document.getElementById('solution-s6');
+                if (revealBtn && solutionDiv) {
+                    revealBtn.addEventListener('click', () => {
+                        solutionDiv.style.display = 'block';
+                        revealBtn.style.display = 'none';
+                    });
+                }
+            </script>
+
+            <div id="solution-s6" style="display: none;">
+                <h3 class="mt-2">HAP's Prompt</h3>
+
+                <div class="prompt-box mt-1">
+                    <div class="prompt-label">What I should have asked:</div>
+                    <CodeBlock code={`I am on macOS using zsh in VS Code's integrated terminal.
+
+I ran this command:
+curl https://api.github.com/user
+
+I got this response:
+{"message": "Requires authentication",
+ "documentation_url": "https://docs.github.com/rest"}
+
+I have a GitHub personal access token saved in my
+environment but I am not sure how to pass it with curl.
+
+How do I authenticate this request using a Bearer token
+in the Authorization header?`} lang="text" />
+                </div>
+
+                <h3 class="mt-2">Why This Works</h3>
+
+                <p class="mt-1">The prompt includes OS and shell, the exact command, the exact error, and what I am trying to do. Nothing vague. Nothing missing. The agent responds with:</p>
+
+                <CodeBlock code={`curl -H "Authorization: Bearer YOUR_TOKEN" https://api.github.com/user`} lang="bash" />
+
+                <p class="mt-1">Grace's principle applied: signal, not noise. The prompt gave the agent everything it needed and nothing it did not. That is Rule 2 in action — give your shell context.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: What's Next — final station wrap
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What's Next</h2>
+
+            <p class="mb-2">This is the final station. The tools are learned. The tradeoffs are understood. What remains is being the architect who holds it together.</p>
+
+            <p class="mt-1"><a href="https://hap-7000.netlify.app">hap-7000.netlify.app</a> is live — the site I deployed in Station 3. Go look at the deploy log. Read every command that ran. You can read all of it now.</p>
+
+            <p class="mt-1">Where to go from here: shell scripting. Writing your own CLI tools. Digging into what MCP servers actually send over the wire. Contributing to the <a href="https://github.com/cynthiateeters/ready-build">ready-build</a> harness. The terminal is not going anywhere, and neither is the architect's role in using it well.</p>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>Prof. Teeters:</h3>
+                    <p>"The terminal is a language. You are not fluent yet. But you are past tourist. That matters."</p>
+                </div>
+            </div>
+
+            <p class="mt-2" style="text-align: center;">I put together a <a href="/cli-cheat-sheet/">cheat sheet</a> that covers the CLI tools I use most. Keep it open. Keep practicing. Keep improving the harness. 🟠</p>
+        </div>
+    </section>
+
+    <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_100,c_limit/v1/hap-waving_dgzacg.jpg" alt="HAP waving goodbye" width="100" height="100" loading="lazy" decoding="async" style="display: block; margin: 1rem auto;">
+
+</StationLayout>
